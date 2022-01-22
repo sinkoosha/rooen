@@ -1,0 +1,15 @@
+.con {
+  display: flex;
+  flex-direction: row;
+}
+.indexHome {
+  flex: 6;
+  padding: 10px;
+  background-color: rgb(251, 251, 255);
+  margin: 0px 30px;
+}
+
+.homeWidgets {
+  display: flex;
+  margin: 20px;
+}
