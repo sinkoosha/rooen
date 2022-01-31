@@ -22,6 +22,7 @@ import IllnessIndex from "../../Pages/illness/IllnessIndex";
 import AddIllness from "../../Pages/illness/AddIllnes/AddIllness";
 import EditEllness from "../../Pages/illness/editIllness/EditIllness";
 import PriceListIndex from "../../Pages/priceList/priceListIndex";
+import AddpriceList from "../../Pages/priceList/AddpriceList/AddPriceList";
 
 function Dashboard() {
   return (
@@ -75,6 +76,14 @@ function Dashboard() {
             <Route
               path="/priceList"
               element={<PriceListIndex />}
+            ></Route>
+            <Route
+              path="/priceList"
+              element={<PriceListIndex />}
+            ></Route>
+            <Route
+              path="/addpriceList"
+              element={<AddpriceList />}
             ></Route>
           </Routes>
         </BrowserRouter>

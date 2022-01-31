@@ -83,7 +83,7 @@ export default function Rightbar() {
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">مدیریت لیست قیمت </h3>
             <ul className="sidebarList">
-              <Link to="/addIllness" className="link">
+              <Link to="/addpriceList" className="link">
                 <li className="sidebarListItem">
                   <PermIdentity className="sidebarIcon" />
                   افزودن لیست قیمت
