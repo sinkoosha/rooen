@@ -8,3 +8,7 @@
   text-decoration: none;
   color: inherit;
 }
+.App {
+  background-color: #34495e;
+  width: 100%;
+}

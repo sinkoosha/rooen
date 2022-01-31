@@ -1,10 +1,10 @@
 .topbar {
-  height: 100%;
   padding: 0px 20px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: row-reverse;
+  background-color: white;
 }
 
 .topbarWrapper {

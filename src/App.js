@@ -18,11 +18,14 @@ import auth from "./contax/authContax";
 function App() {
   const [authLogin, setAuthLogin] = useState();
   const [apiInfo, setApiInfo] = useState({});
+  localStorage.getItem("accessToken")
+    ? console.log("ok")
+    : console.log("nok");
 
   return (
     <auth.Provider value={apiInfo}>
-      <>
-        {authLogin == null ? (
+      <div className="App">
+        {!localStorage.getItem("accessToken") ? (
           <Login
             authLogin={authLogin}
             setAuthLogin={setAuthLogin}
@@ -35,7 +38,7 @@ function App() {
             setAuthLogin={setAuthLogin}
           />
         )}
-      </>
+      </div>
     </auth.Provider>
   );
 }

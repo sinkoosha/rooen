@@ -1,10 +1,11 @@
 .sidebar {
   flex: 1 1;
-  height: calc(100vh - 50px);
-  background-color: #34495e;
 
+  background-color: #34495e;
   top: 50px;
-  overflow-y: scroll;
+
+  position: absolute;
+  z-index: 16;
 }
 
 .sidebarWrapper {

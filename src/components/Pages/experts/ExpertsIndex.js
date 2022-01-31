@@ -1,26 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import auth from "../../../contax/authContax";
-// import { expertsIndex } from "../../../utils/apiConfig";
+
 import PregnantWomanOutlinedIcon from "@mui/icons-material/PregnantWomanOutlined";
 import ManOutlinedIcon from "@mui/icons-material/ManOutlined";
 import WomanOutlinedIcon from "@mui/icons-material/WomanOutlined";
 import CachedSharpIcon from "@mui/icons-material/CachedSharp";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { InsertEmoticonRounded } from "@mui/icons-material";
 
 function ExpertsIndex() {
-  const { accessToken } = useContext(auth);
-
+  const accessToken = localStorage.getItem("accessToken");
   const [fetchExpres, setfetchExpres] = useState(null);
   const [refresh, setRefresh] = useState(0);
 
   const expertsIndex = () => {
-    let jsonData;
-
     // POST request using fetch()
     fetch("http://95.217.96.131:8080/api/admin/index-expert", {
       // Adding method type
@@ -40,7 +33,6 @@ function ExpertsIndex() {
       // // Displaying results to console
       .then((json) => {
         setfetchExpres(json.data);
-        setRefresh(refresh++);
       });
   };
 
@@ -66,13 +58,7 @@ function ExpertsIndex() {
     setRefresh(refresh + 1);
   };
 
-  const handelUserInfo = (userId) => {
-    <BrowserRouter>
-      <Routes>
-        <Route path="/"></Route>
-      </Routes>
-    </BrowserRouter>;
-  };
+  const handelUserInfo = (userId) => {};
 
   return (
     <div className="indexHome">
@@ -87,8 +73,7 @@ function ExpertsIndex() {
                 <th scope="col">جنسیت</th>
                 <th scope="col">شماره تماس</th>
                 <th scope="col">وضعیت</th>
-
-                <th scope="col"></th>
+                <th scope="col">اطلاعات بیشتر</th>
               </tr>
             </thead>
             <tbody>
@@ -102,9 +87,9 @@ function ExpertsIndex() {
                     <td>{statusHandele(item.is_active)}</td>
 
                     <td>
-                      <button onClick={handelUserInfo(item.id)}>
+                      <Link to={`users/${item.id}`} state={item}>
                         اطلاعات بیشتر
-                      </button>
+                      </Link>
                     </td>
                   </tr>
                 ))

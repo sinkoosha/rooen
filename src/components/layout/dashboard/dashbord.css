@@ -1,15 +1,28 @@
 .con {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .indexHome {
-  flex: 6;
+  flex: 6 1;
   padding: 10px;
   background-color: rgb(251, 251, 255);
-  margin: 0px 30px;
+  margin: 0px 250px 0px 0px;
+  min-height: 940px;
+  border-right: 1px solid #e7e7e7;
 }
 
 .homeWidgets {
   display: flex;
   margin: 20px;
+}
+.input-group > .form-control,
+.input-group > .form-select {
+  text-align: center;
+}
+.form-select {
+  text-align: center;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
 }

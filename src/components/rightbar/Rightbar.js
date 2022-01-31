@@ -33,10 +33,50 @@ export default function Rightbar() {
             <Link to="/test" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
-                HOME
+                مدیریت در خواست ها
               </li>
             </Link>
           </ul>
+        </div>
+
+        <div className="sidebarWrapper">
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">مدیریت برنامه ها</h3>
+            <ul className="sidebarList">
+              <Link to="/addProgram" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  افزودن برنامه
+                </li>
+              </Link>
+              <Link to="/program" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  مشاهده برنامه
+                </li>
+              </Link>
+            </ul>
+          </div>
+        </div>
+
+        <div className="sidebarWrapper">
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">مدیریت بیماری ها</h3>
+            <ul className="sidebarList">
+              <Link to="/addIllness" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  افزودن بیماری
+                </li>
+              </Link>
+              <Link to="/illness" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  مشاهده بیماری
+                </li>
+              </Link>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
