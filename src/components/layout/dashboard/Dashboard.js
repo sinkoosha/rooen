@@ -56,6 +56,10 @@ function Dashboard() {
               element={<AddProgramQuestion />}
             ></Route>
             <Route
+              path="/editQes/:id"
+              element={<EditeProgramQuestion />}
+            ></Route>
+            <Route
               path="/Illness"
               element={<IllnessIndex />}
             ></Route>
