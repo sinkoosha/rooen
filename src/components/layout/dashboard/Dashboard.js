@@ -21,6 +21,7 @@ import EditeProgramQuestion from "../../Pages/program/programQuestion/editeProgr
 import IllnessIndex from "../../Pages/illness/IllnessIndex";
 import AddIllness from "../../Pages/illness/AddIllnes/AddIllness";
 import EditEllness from "../../Pages/illness/editIllness/EditIllness";
+import PriceListIndex from "../../Pages/priceList/priceListIndex";
 
 function Dashboard() {
   return (
@@ -70,6 +71,10 @@ function Dashboard() {
             <Route
               path="/editIlness/:id"
               element={<EditEllness />}
+            ></Route>
+            <Route
+              path="/priceList"
+              element={<PriceListIndex />}
             ></Route>
           </Routes>
         </BrowserRouter>
