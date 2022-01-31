@@ -1,7 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import auth from "../../../../contax/authContax";
-import { Link, useParams, useLocation } from "react-router-dom";
+import {
+  Link,
+  useParams,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 function EditProgram() {
+  const Nav = useNavigate();
   const [programTitle, SetProgramTitle] = useState(
     useLocation().state.name
   );
@@ -50,7 +56,7 @@ function EditProgram() {
       // // Displaying results to console
       .then((json) => {
         if (json[0].msg == "success") {
-          window.location.href = "/program";
+          Nav(-1);
         }
       });
   };
