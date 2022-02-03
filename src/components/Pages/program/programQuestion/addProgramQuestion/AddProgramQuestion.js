@@ -5,11 +5,20 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import DescriptiveQestion from "../../../../layout/DescriptiveQestion/DescriptiveQestion";
+import ImageQestion from "../../../../layout/ImageQestion/ImageQestion";
+import MultiQestionWimage from "../../../../layout/MultiQestionWImage/MultiQestionWimage";
+import MultiQestionShortly from "../../../../layout/mutiqestion-Shortly/multiQestionShortly";
+import TrueFalse from "../../../../layout/trueFalse/TrueFalse";
 
 function AddProgramQuestion() {
   const [questionTitle, setQuestionTitle] = useState();
   const [questionType, setQuestionType] = useState();
   const [questionPolicy, setQuestionPolicy] = useState();
+  const [inputShortQes, setInputShortQes] = useState([
+    { qestion: "" },
+  ]);
+
   const navigate = useNavigate();
   const programItem = useLocation().state;
 
@@ -31,13 +40,17 @@ function AddProgramQuestion() {
     e.preventDefault();
     const formData = new FormData();
 
-    formData.append("question", questionTitle);
+    formData.append(
+      "question",
+      handelOutPutJsonFormat(inputShortQes)
+    );
     formData.append("title_program_id", programItem.id);
     formData.append("type_of_question", questionType);
     formData.append("is_public", questionPolicy);
+    formData.append("is_necessary", 1);
 
     fetch(
-      "http://95.217.96.131:8080/api/admin/insert-question",
+      "http://95.217.96.131:8080/api/admin/insert-question/",
       {
         // Adding method type
         method: "POST",
@@ -64,14 +77,24 @@ function AddProgramQuestion() {
       });
   };
 
+  const handelOutPutJsonFormat = (value) => {
+    let result = "";
+    value.map((item, i) => {
+      value.length - 1 !== i
+        ? (result += `[${item.qestion}],`)
+        : (result += `[${item.qestion}]`);
+    });
+    return result;
+  };
+
   return (
     <div className="indexHome ">
       <div class="">
         <div class="card-header">
-          {" "}
           {programItem.name} - اضافه کردن پرسش های برنامه
         </div>
         <div class="card-body">
+          <pre>{handelOutPutJsonFormat(inputShortQes)}</pre>
           <form className="col-md-6" onSubmit={HandelSubmit}>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label">
@@ -95,10 +118,30 @@ function AddProgramQuestion() {
                 onChange={handelTypeQuestion}
               >
                 <option selected>نوع پرسش ...</option>
-                <option value="0">پرسش مدل 0</option>
-                <option value="1">پرسش مدل 1</option>
+                <option value="0">
+                  چند گزینه ایی متن کوتاه
+                </option>
+                <option value="1">چند گزینه ایی متن بلند</option>
+                <option value="2">
+                  چند گزیته ایی متن و عکس
+                </option>
+                <option value="3">بله / خیر</option>
+                <option value="4">تشریحی متن کامل</option>
+                <option value="5">آپلود عکس</option>
               </select>
             </div>
+            {questionType == 0 && (
+              <MultiQestionShortly
+                inputShortQes={inputShortQes}
+                setInputShortQes={setInputShortQes}
+              />
+            )}
+            {questionType == 1 && <DescriptiveQestion />}
+            {questionType == 2 && <MultiQestionWimage />}
+            {questionType == 3 && <TrueFalse />}
+            {questionType == 4 && <MultiQestionShortly />}
+            {questionType == 5 && <ImageQestion />}
+
             <div class=" mb-3">
               <label for="disabledTextInput" class="form-label">
                 خصوصی / عمومی

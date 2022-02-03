@@ -83,7 +83,7 @@ function PriceListIndex() {
 
                       <td>
                         <Link
-                          to={`/editIlness/${item.id}`}
+                          to={`/editPriceList/${item.id}`}
                           state={item}
                         >
                           ویرایش
