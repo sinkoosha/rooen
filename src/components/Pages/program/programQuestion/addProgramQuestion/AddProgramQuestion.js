@@ -14,8 +14,16 @@ import TrueFalse from "../../../../layout/trueFalse/TrueFalse";
 function AddProgramQuestion() {
   const [questionTitle, setQuestionTitle] = useState();
   const [questionType, setQuestionType] = useState();
+
   const [questionPolicy, setQuestionPolicy] = useState();
   const [inputShortQes, setInputShortQes] = useState([
+    { qestion: "" },
+  ]);
+  const [descriptiveQestion, setDescriptiveQestion] = useState([
+    { qestion: "" },
+  ]);
+  const [finalQestion, setFinalQestion] = useState();
+  const [imageQestion, setImageQestion] = useState([
     { qestion: "" },
   ]);
 
@@ -28,7 +36,6 @@ function AddProgramQuestion() {
   };
   const handelTypeQuestion = (e) => {
     setQuestionType(e.target.value);
-    console.log(questionType);
   };
   const handelquestionPolicy = (e) => {
     setQuestionPolicy(e.target.value);
@@ -36,13 +43,24 @@ function AddProgramQuestion() {
   };
   const accessToken = localStorage.getItem("accessToken");
 
+  const handelFinalQestion = () => {
+    if (questionType == 0) {
+      return inputShortQes;
+    }
+    if (questionType == 1) {
+      return descriptiveQestion;
+    }
+  };
+
   const HandelSubmit = (e) => {
     e.preventDefault();
+
+    console.log(handelFinalQestion());
     const formData = new FormData();
 
     formData.append(
       "question",
-      handelOutPutJsonFormat(inputShortQes)
+      handelOutPutJsonFormat(handelFinalQestion())
     );
     formData.append("title_program_id", programItem.id);
     formData.append("type_of_question", questionType);
@@ -94,7 +112,7 @@ function AddProgramQuestion() {
           {programItem.name} - اضافه کردن پرسش های برنامه
         </div>
         <div class="card-body">
-          <pre>{handelOutPutJsonFormat(inputShortQes)}</pre>
+          <pre>{handelOutPutJsonFormat(descriptiveQestion)}</pre>
           <form className="col-md-6" onSubmit={HandelSubmit}>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label">
@@ -136,11 +154,32 @@ function AddProgramQuestion() {
                 setInputShortQes={setInputShortQes}
               />
             )}
-            {questionType == 1 && <DescriptiveQestion />}
-            {questionType == 2 && <MultiQestionWimage />}
+            {questionType == 1 && (
+              <DescriptiveQestion
+                descriptiveQestion={descriptiveQestion}
+                setDescriptiveQestion={setDescriptiveQestion}
+              />
+            )}
+            {questionType == 2 && (
+              <>
+                <ImageQestion
+                  imageQestion={imageQestion}
+                  setImageQestion={setImageQestion}
+                />
+                <MultiQestionShortly
+                  inputShortQes={inputShortQes}
+                  setInputShortQes={setInputShortQes}
+                />
+              </>
+            )}
             {questionType == 3 && <TrueFalse />}
             {questionType == 4 && <MultiQestionShortly />}
-            {questionType == 5 && <ImageQestion />}
+            {questionType == 5 && (
+              <ImageQestion
+                imageQestion={imageQestion}
+                setImageQestion={setImageQestion}
+              />
+            )}
 
             <div class=" mb-3">
               <label for="disabledTextInput" class="form-label">

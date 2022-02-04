@@ -23,7 +23,7 @@ function App() {
     : console.log("nok");
 
   return (
-    <auth.Provider value={apiInfo}>
+    <auth.Provider value={{}}>
       <div className="App">
         {!localStorage.getItem("accessToken") ? (
           <Login
