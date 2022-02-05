@@ -18,12 +18,17 @@ function AddpriceList() {
     setPriceListTitle(e.target.value);
   };
   const [refresh, setRefresh] = useState();
+  const [ProgramType, setProgramType] = useState(1);
 
   const handelPrice = (e) => {
     setPrice(e.target.value);
   };
   const handelpackageDay = (e) => {
     setPackageDay(e.target.value);
+  };
+
+  const handelTypeProgram = (e) => {
+    setProgramType(e.target.value);
   };
 
   const accessToken = localStorage.getItem("accessToken");
@@ -63,7 +68,7 @@ function AddpriceList() {
     formData.append("name", priceListTitle);
     formData.append("price", price);
     formData.append("total_days", packageDay);
-    formData.append("diet_id", dietId);
+    formData.append("diet_id", ProgramType);
     fetch(
       "http://95.217.96.131:8080/api/admin/insert-pricelist",
       {
@@ -85,7 +90,7 @@ function AddpriceList() {
         if (json[0].msg == "success") {
           console.log();
           // window.location.href = `/program/indexQuestion/${programItem.id}`;
-          navigate(-1);
+          navigate("/priceList");
         }
       });
   };
@@ -124,13 +129,15 @@ function AddpriceList() {
               <label for="disabledTextInput" class="form-label">
                 نوع برنامه
               </label>
-              <input
-                type="text"
-                id="disabledTextInput"
-                class="form-control"
-                placeholder="قیمت پکیج"
-                onChange={handelPrice}
-              />
+              <select
+                class="form-select"
+                id="inputGroupSelect0"
+                onChange={handelTypeProgram}
+              >
+                {fetchProgram.map((item, i) => {
+                  return <option value={i}>{item.name}</option>;
+                })}
+              </select>
             </div>
             <div class="mb-3">
               <label for="disabledTextInput" class="form-label">

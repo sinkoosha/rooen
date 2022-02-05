@@ -15,8 +15,36 @@ import { fetchProgram } from "../../../utils/apiConfig";
 function PriceListIndex() {
   const accessToken = localStorage.getItem("accessToken");
   const [fetchPriceList, setFetchPriceList] = useState(null);
+  const [fetchProgram, setFetchProgram] = useState(null);
   const [refresh, setRefresh] = useState(0);
   let counter = 1;
+
+  const programIndex = () => {
+    // POST request using fetch()
+    fetch(
+      "http://95.217.96.131:8080/api/admin/index-titleprogram/",
+      {
+        // Adding method type
+        method: "GET",
+        // Adding body or contents to send
+
+        // Adding headers to the request
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json, text-plain, */*",
+          "X-Requested-With": "XMLHttpRequest",
+          Authorization: accessToken,
+        },
+      }
+    )
+      // Converting to JSON
+      .then((response) => response.json())
+      // // Displaying results to console
+      .then((json) => {
+        setFetchProgram(json.data);
+      });
+  };
+
   const priceListIndex = () => {
     // POST request using fetch()
     fetch(
@@ -46,11 +74,18 @@ function PriceListIndex() {
   };
 
   useEffect(() => {
+    programIndex();
     priceListIndex();
   }, [refresh]);
 
   const handelPriceListRefresh = () => {
     setRefresh(refresh + 1);
+  };
+
+  const findProgramName = (id) => {
+    if (fetchProgram) {
+      return fetchProgram.filter((item) => item.id == id);
+    }
   };
 
   return (
@@ -72,13 +107,15 @@ function PriceListIndex() {
               </tr>
             </thead>
             <tbody>
-              {fetchPriceList != null ? (
+              {fetchPriceList != null && fetchProgram != null ? (
                 fetchPriceList.length != 0 ? (
                   fetchPriceList.map((item) => (
                     <tr>
                       <th scope="row">{counter++}</th>
                       <td>{item.name}</td>
-                      <td>{item.diet_id}</td>
+                      <td>
+                        {findProgramName(item.diet_id)[0].name}
+                      </td>
                       <td>{item.price}</td>
                       <td>{item.total_days} روز</td>
 
