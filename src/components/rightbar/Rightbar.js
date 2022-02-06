@@ -61,6 +61,26 @@ export default function Rightbar() {
 
         <div className="sidebarWrapper">
           <div className="sidebarMenu">
+            <h3 className="sidebarTitle">مدیریت وعده غذایی </h3>
+            <ul className="sidebarList">
+              <Link to="/addMeal" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  افزودن وعده غذایی
+                </li>
+              </Link>
+              <Link to="/meals" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  مشاهده وعده غذایی
+                </li>
+              </Link>
+            </ul>
+          </div>
+        </div>
+
+        <div className="sidebarWrapper">
+          <div className="sidebarMenu">
             <h3 className="sidebarTitle">مدیریت بیماری ها</h3>
             <ul className="sidebarList">
               <Link to="/addIllness" className="link">

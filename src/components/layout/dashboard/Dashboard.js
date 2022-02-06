@@ -23,6 +23,10 @@ import AddIllness from "../../Pages/illness/AddIllnes/AddIllness";
 import EditEllness from "../../Pages/illness/editIllness/EditIllness";
 import PriceListIndex from "../../Pages/priceList/priceListIndex";
 import AddpriceList from "../../Pages/priceList/AddpriceList/AddPriceList";
+import EditpriceList from "../../Pages/priceList/ٍEditePriceList/EditePriceList";
+import MealIndex from "../../Pages/meal/MealIndex";
+import AddMeal from "../../Pages/meal/Addmeal/AddMeal";
+import EditMeals from "../../Pages/meal/EditMeals/EditMeals";
 
 function Dashboard() {
   return (
@@ -84,6 +88,16 @@ function Dashboard() {
             <Route
               path="/addpriceList"
               element={<AddpriceList />}
+            ></Route>
+            <Route
+              path="/editPriceList/:id"
+              element={<EditpriceList />}
+            ></Route>
+            <Route path="/meals" element={<MealIndex />}></Route>
+            <Route path="/addMeal" element={<AddMeal />}></Route>
+            <Route
+              path="/editMeals/:id"
+              element={<EditMeals />}
             ></Route>
           </Routes>
         </BrowserRouter>
