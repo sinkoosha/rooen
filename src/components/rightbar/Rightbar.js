@@ -101,6 +101,26 @@ export default function Rightbar() {
 
         <div className="sidebarWrapper">
           <div className="sidebarMenu">
+            <h3 className="sidebarTitle">مدیریت کلید واژه </h3>
+            <ul className="sidebarList">
+              <Link to="/addkeyword" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  افزودن کلید واژه
+                </li>
+              </Link>
+              <Link to="/keyword" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  مدیریت کلید واژه
+                </li>
+              </Link>
+            </ul>
+          </div>
+        </div>
+
+        <div className="sidebarWrapper">
+          <div className="sidebarMenu">
             <h3 className="sidebarTitle">مدیریت لیست قیمت </h3>
             <ul className="sidebarList">
               <Link to="/addpriceList" className="link">

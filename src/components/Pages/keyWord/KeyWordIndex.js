@@ -11,19 +11,19 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { InsertEmoticonRounded } from "@mui/icons-material";
-function IllnessIndex() {
+function KeyWordIndex() {
   const programId = useParams().id;
 
   const programItem = useLocation().state;
   console.log("programItem", programItem);
 
   const accessToken = localStorage.getItem("accessToken");
-  const [fetchIllness, setFetchIllness] = useState(null);
+  const [fetchKeyWord, setFetchKeyWord] = useState(null);
   const [refresh, setRefresh] = useState(0);
   let counter = 1;
-  const illnessIndex = () => {
+  const keyWordIndex = () => {
     // POST request using fetch()
-    fetch(`http://95.217.96.131:8080/api/admin/index-illness`, {
+    fetch(`http://95.217.96.131:8080/api/admin/index-keyword/`, {
       // Adding method type
       method: "GET",
       // Adding body or contents to send
@@ -41,13 +41,13 @@ function IllnessIndex() {
       // // Displaying results to console
       .then((json) => {
         json.data == 0
-          ? setFetchIllness([])
-          : setFetchIllness(json.data);
+          ? setFetchKeyWord([])
+          : setFetchKeyWord(json.data);
       });
   };
 
   useEffect(() => {
-    illnessIndex();
+    keyWordIndex();
   }, [refresh]);
 
   const handelIllnessRefresh = () => {
@@ -58,13 +58,13 @@ function IllnessIndex() {
     <div className="indexHome">
       <div class="card">
         <div class="card-header">
-          <h5>مشاهده بیماری</h5>
+          <h5>مشاهده کلید واژه</h5>
           <Link
-            to={`/addQes/${programId}`}
+            to={`/addkeyword`}
             className="btn btn-primary"
             state={programItem}
           >
-            افزودن بیماری{" "}
+            افزودن کلید واژه
           </Link>
         </div>
         <div class="card-body">
@@ -77,16 +77,16 @@ function IllnessIndex() {
               </tr>
             </thead>
             <tbody>
-              {fetchIllness != null ? (
-                fetchIllness.length != 0 ? (
-                  fetchIllness.map((item) => (
+              {fetchKeyWord != null ? (
+                fetchKeyWord.length != 0 ? (
+                  fetchKeyWord.map((item) => (
                     <tr>
                       <th scope="row">{counter++}</th>
                       <td>{item.name}</td>
 
                       <td>
                         <Link
-                          to={`/editIlness/${item.id}`}
+                          to={`/editKeyWord/${item.id}`}
                           state={item}
                         >
                           ویرایش
@@ -116,4 +116,4 @@ function IllnessIndex() {
   );
 }
 
-export default IllnessIndex;
+export default KeyWordIndex;

@@ -6,8 +6,11 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-function AddKeyWord() {
-  const [keyWordTitle, setKeyWordTitle] = useState();
+function EditKeyWord() {
+  const keywordItem = useLocation().state;
+  const [keyWordTitle, setKeyWordTitle] = useState(
+    keywordItem.name
+  );
 
   const navigate = useNavigate();
 
@@ -24,7 +27,7 @@ function AddKeyWord() {
 
     formData.append("name", keyWordTitle);
 
-    fetch("http://95.217.96.131:8080/api/admin/insert-keyword", {
+    fetch("http://95.217.96.131:8080/api/admin/edit-keyword", {
       // Adding method type
       method: "POST",
       // Adding body or contents to send
@@ -43,7 +46,7 @@ function AddKeyWord() {
         console.log("ok", json[0].msg);
         if (json[0].msg == "success") {
           console.log();
-          // window.location.href = `/program/indexQuestion/${programItem.id}`;
+
           navigate(-1);
         }
       });
@@ -52,7 +55,7 @@ function AddKeyWord() {
   return (
     <div className="indexHome ">
       <div class="">
-        <div class="card-header"> افزودن کلید واژه</div>
+        <div class="card-header"> ویرایش کلید واژه</div>
         <div class="card-body">
           <form className="col-md-6" onSubmit={HandelSubmit}>
             <div class="mb-3">
@@ -65,13 +68,14 @@ function AddKeyWord() {
                 class="form-control"
                 placeholder="نام کلید واژه"
                 onChange={handelKeyWordTitle}
+                value={keyWordTitle}
               />
             </div>
 
             <div></div>
 
             <button type="submit" class="btn btn-primary">
-              اضافه کردن
+              ویرایش کردن
             </button>
           </form>
         </div>
@@ -80,4 +84,4 @@ function AddKeyWord() {
   );
 }
 
-export default AddKeyWord;
+export default EditKeyWord;

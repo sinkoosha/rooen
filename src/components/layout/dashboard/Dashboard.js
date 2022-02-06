@@ -27,6 +27,9 @@ import EditpriceList from "../../Pages/priceList/ٍEditePriceList/EditePriceList
 import MealIndex from "../../Pages/meal/MealIndex";
 import AddMeal from "../../Pages/meal/Addmeal/AddMeal";
 import EditMeals from "../../Pages/meal/EditMeals/EditMeals";
+import AddKeyWord from "../../Pages/keyWord/AddIKeyWord/AddKeyWord";
+import KeyWordIndex from "../../Pages/keyWord/KeyWordIndex";
+import EditKeyWord from "../../Pages/keyWord/editKeyWord/EditWord";
 
 function Dashboard() {
   return (
@@ -98,6 +101,18 @@ function Dashboard() {
             <Route
               path="/editMeals/:id"
               element={<EditMeals />}
+            ></Route>
+            <Route
+              path="/addkeyword"
+              element={<AddKeyWord />}
+            ></Route>
+            <Route
+              path="/keyword"
+              element={<KeyWordIndex />}
+            ></Route>
+            <Route
+              path="/editkeyword/:id"
+              element={<EditKeyWord />}
             ></Route>
           </Routes>
         </BrowserRouter>
