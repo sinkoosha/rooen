@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Link,
@@ -9,6 +9,7 @@ import DescriptiveQestion from "../../../../layout/DescriptiveQestion/Descriptiv
 import ImageQestion from "../../../../layout/ImageQestion/ImageQestion";
 import MultiQestionWimage from "../../../../layout/MultiQestionWImage/MultiQestionWimage";
 import MultiQestionShortly from "../../../../layout/mutiqestion-Shortly/multiQestionShortly";
+import SingleDescriptiveQestion from "../../../../layout/SingleDescriptiveQestion/SingleDescriptiveQestion";
 import TrueFalse from "../../../../layout/trueFalse/TrueFalse";
 
 function AddProgramQuestion() {
@@ -19,6 +20,12 @@ function AddProgramQuestion() {
   const [inputShortQes, setInputShortQes] = useState([
     { qestion: "" },
   ]);
+  const [bolQes, setBolQes] = useState([
+    { qestion1: "", qestion2: "" },
+  ]);
+  const [singleDescriptiveQestion, setSingleDescriptiveQestion] =
+    useState();
+
   const [descriptiveQestion, setDescriptiveQestion] = useState([
     { qestion: "" },
   ]);
@@ -45,10 +52,16 @@ function AddProgramQuestion() {
 
   const handelFinalQestion = () => {
     if (questionType == 0) {
-      return inputShortQes;
+      return JSON.stringify(inputShortQes);
     }
     if (questionType == 1) {
-      return descriptiveQestion;
+      return JSON.stringify(descriptiveQestion);
+    }
+    if (questionType == 3) {
+      return JSON.stringify(bolQes);
+    }
+    if (questionType == 4) {
+      return JSON.stringify(singleDescriptiveQestion);
     }
   };
 
@@ -58,10 +71,7 @@ function AddProgramQuestion() {
     console.log(handelFinalQestion());
     const formData = new FormData();
 
-    formData.append(
-      "question",
-      handelOutPutJsonFormat(handelFinalQestion())
-    );
+    formData.append("question", handelFinalQestion());
     formData.append("title_program_id", programItem.id);
     formData.append("type_of_question", questionType);
     formData.append("is_public", questionPolicy);
@@ -172,8 +182,19 @@ function AddProgramQuestion() {
                 />
               </>
             )}
-            {questionType == 3 && <TrueFalse />}
-            {questionType == 4 && <MultiQestionShortly />}
+            {questionType == 3 && (
+              <TrueFalse bolQes={bolQes} setBolQes={setBolQes} />
+            )}
+            {questionType == 4 && (
+              <SingleDescriptiveQestion
+                singleDescriptiveQestion={
+                  singleDescriptiveQestion
+                }
+                setSingleDescriptiveQestion={
+                  setSingleDescriptiveQestion
+                }
+              />
+            )}
             {questionType == 5 && (
               <ImageQestion
                 imageQestion={imageQestion}

@@ -9,6 +9,7 @@ import {
 
 function EditMeals() {
   const MealsIteam = useLocation().state;
+  console.log(MealsIteam);
   const navigate = useNavigate();
   const [detailsMeal, setDetailsMeal] = useState(
     MealsIteam.details
@@ -84,6 +85,7 @@ function EditMeals() {
 
   const HandelSubmit = (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.append("details", detailsMeal);
     formData.append("season", season);
@@ -91,6 +93,7 @@ function EditMeals() {
     formData.append("sumcalories", sumCalories);
     formData.append("illness_id", illnessId);
     formData.append("description", description);
+    formData.append("meal_id", MealsIteam.id);
     fetch("http://95.217.96.131:8080/api/admin/edit-meal", {
       // Adding method type
       method: "POST",

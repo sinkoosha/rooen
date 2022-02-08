@@ -6,10 +6,13 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import EditDescriptiveQestion from "../../../../layout/EditQestion/EditDescriptiveQestion/EditDescriptiveQestion";
+import EditMultiQestion from "../../../../layout/EditQestion/multiQestion/EditMultiQestion";
+import EditSingleDescriptiveQestion from "../../../../layout/EditQestion/ٍEditSingleDescriptiveQestion/EditSingleDescriptiveQestion";
 function EditeProgramQuestion() {
   const nav = useNavigate();
   const questionitem = useLocation().state;
-  console.log(questionitem);
+  console.log("qestion", questionitem);
   const [questionTitle, setQuestionTitle] = useState(
     questionitem.question
   );
@@ -18,6 +21,19 @@ function EditeProgramQuestion() {
   );
   const [questionPolicy, setQuestionPolicy] = useState(
     questionitem.is_public
+  );
+  const [isNecessary, setIsNecessary] = useState(1);
+  const [inputShortQes, setInputShortQes] = useState(
+    JSON.parse(questionitem.question)
+  );
+  const [singleDescriptiveQestion, setSingleDescriptiveQestion] =
+    useState(JSON.parse(questionitem.question));
+
+  const [descriptiveQestion, setDescriptiveQestion] = useState(
+    JSON.parse(questionitem.question)
+  );
+  const [bolQes, setBolQes] = useState(
+    JSON.parse(questionitem.question)
   );
 
   const handelTitleQuestion = (e) => {
@@ -34,6 +50,20 @@ function EditeProgramQuestion() {
   };
 
   const accessToken = localStorage.getItem("accessToken");
+  const handelFinalQestion = () => {
+    if (questionType == 0) {
+      return JSON.stringify(inputShortQes);
+    }
+    if (questionType == 1) {
+      return JSON.stringify(descriptiveQestion);
+    }
+    // if (questionType == 3) {
+    //   return `[${bolQes.qestion1}],[${bolQes.qestion2}]`;
+    // }
+    if (questionType == 4) {
+      return JSON.stringify(singleDescriptiveQestion);
+    }
+  };
 
   const HandelSubmit = (e) => {
     const formData = new FormData();
@@ -46,6 +76,7 @@ function EditeProgramQuestion() {
       "title_program_id",
       questionitem.title_program_id
     );
+    formData.append("is_necessary", 1);
 
     e.preventDefault();
     fetch("http://95.217.96.131:8080/api/admin/edit-question", {
@@ -62,11 +93,12 @@ function EditeProgramQuestion() {
       },
 
       body: JSON.stringify({
-        question: questionTitle,
+        question: handelFinalQestion(),
         question_id: questionitem.id,
         type_of_question: questionType,
         is_public: questionPolicy,
         title_program_id: questionitem.title_program_id,
+        is_necessary: "1",
       }),
     })
       // Converting to JSON
@@ -113,16 +145,53 @@ function EditeProgramQuestion() {
                   value="0"
                   selected={questionType == 0 ? "selected" : ""}
                 >
-                  پرسش مدل 0
+                  چند گزینه ایی متن کوتاه
                 </option>
                 <option
                   value="1"
                   selected={questionType == 1 ? "selected" : ""}
                 >
-                  پرسش مدل 1
+                  چند گزینه ایی متن بلند
+                </option>
+                <option
+                  value="4"
+                  selected={questionType == 4 ? "selected" : ""}
+                >
+                  تشریحی کامل
                 </option>
               </select>
             </div>
+
+            {questionType == 0 && (
+              <EditMultiQestion
+                inputShortQes={inputShortQes}
+                setInputShortQes={setInputShortQes}
+              />
+            )}
+
+            {questionType == 1 && (
+              <EditDescriptiveQestion
+                descriptiveQestion={descriptiveQestion}
+                setDescriptiveQestion={setDescriptiveQestion}
+              />
+            )}
+            {questionType == 3 && (
+              <EditDescriptiveQestion
+                descriptiveQestion={descriptiveQestion}
+                setDescriptiveQestion={setDescriptiveQestion}
+              />
+            )}
+            {questionType == 4 && (
+              <EditSingleDescriptiveQestion
+                singleDescriptiveQestion={
+                  singleDescriptiveQestion
+                }
+                setSingleDescriptiveQestion={
+                  setSingleDescriptiveQestion
+                }
+              />
+            )}
+
             <div class=" mb-3">
               <label for="disabledTextInput" class="form-label">
                 خصوصی / عمومی
@@ -143,7 +212,7 @@ function EditeProgramQuestion() {
                 <option
                   value="1"
                   selected={
-                    questionPolicy == 0 ? "selected" : ""
+                    questionPolicy == 1 ? "selected" : ""
                   }
                 >
                   عمومی

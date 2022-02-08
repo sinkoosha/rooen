@@ -26,6 +26,7 @@ function EditKeyWord() {
     const formData = new FormData();
 
     formData.append("name", keyWordTitle);
+    formData.append("keyword_id", keywordItem.id);
 
     fetch("http://95.217.96.131:8080/api/admin/edit-keyword", {
       // Adding method type
