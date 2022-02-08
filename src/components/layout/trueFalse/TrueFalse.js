@@ -1,14 +1,12 @@
 import React from "react";
 
 function TrueFalse({ bolQes, setBolQes }) {
-  const handelChange = (e) => {
+  const handelChange = (e, index) => {
     const { name, value } = e.target;
     console.log(bolQes);
-
-    setBolQes({
-      ...bolQes,
-      [name]: value,
-    });
+    const list = [...bolQes];
+    list[index][name] = value;
+    setBolQes(list);
   };
 
   return (
@@ -19,16 +17,17 @@ function TrueFalse({ bolQes, setBolQes }) {
           type="text"
           class="form-control"
           placeholder="سوال یک"
-          onChange={handelChange}
+          onChange={(e) => handelChange(e, 0)}
         />
         <input
           name="qestion2"
           type="text"
           class="form-control"
           placeholder="سوال 2"
-          onChange={handelChange}
+          onChange={(e) => handelChange(e, 1)}
         />
       </div>
+      <pre>{JSON.stringify(bolQes, null, 2)}</pre>
     </div>
   );
 }

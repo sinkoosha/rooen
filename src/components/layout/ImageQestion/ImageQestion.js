@@ -51,6 +51,7 @@ function ImageQestion({ imageQestion, setImageQestion }) {
           </div>
         );
       })}
+      <pre>{JSON.stringify(imageQestion, null, 2)}</pre>
     </div>
   );
 }

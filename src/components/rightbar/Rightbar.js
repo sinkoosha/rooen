@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useContext, useState } from "react";
+import auth from "../../contax/authContax";
 import "./rightbar.css";
 import {
   LineStyle,
@@ -18,8 +18,40 @@ import {
 import { Link } from "react-router-dom";
 
 export default function Rightbar() {
+  const accessToken = localStorage.getItem("accessToken");
+  const mobil = localStorage.getItem("mobil");
+  const authInfo = useContext(auth);
+  const LogOutBtn = () => {
+    console.log(authInfo);
+    fetch("http://95.217.96.131:8080/api/logout", {
+      // Adding method type
+      method: "POST",
+      // Adding body or contents to send
+      body: JSON.stringify({
+        mobil: mobil,
+      }),
+      // Adding headers to the request
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text-plain, */*",
+        "X-Requested-With": "XMLHttpRequest",
+        Authorization: accessToken,
+      },
+    })
+      // Converting to JSON
+      .then((response) => response.json())
+      // // Displaying results to console
+      .then((json) => {
+        localStorage.clear();
+        window.location.href = `/`;
+      });
+  };
+
   return (
     <div className="sidebar">
+      <button className="btn btn-danger" onClick={LogOutBtn}>
+        خروج
+      </button>
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">مدیریت کارشناس ها</h3>

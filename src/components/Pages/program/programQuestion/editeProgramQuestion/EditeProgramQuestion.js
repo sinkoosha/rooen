@@ -7,6 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import EditDescriptiveQestion from "../../../../layout/EditQestion/EditDescriptiveQestion/EditDescriptiveQestion";
+import EditTrueFalse from "../../../../layout/EditQestion/EditTrueFalse/EditTrueFalse";
 import EditMultiQestion from "../../../../layout/EditQestion/multiQestion/EditMultiQestion";
 import EditSingleDescriptiveQestion from "../../../../layout/EditQestion/ٍEditSingleDescriptiveQestion/EditSingleDescriptiveQestion";
 function EditeProgramQuestion() {
@@ -57,9 +58,9 @@ function EditeProgramQuestion() {
     if (questionType == 1) {
       return JSON.stringify(descriptiveQestion);
     }
-    // if (questionType == 3) {
-    //   return `[${bolQes.qestion1}],[${bolQes.qestion2}]`;
-    // }
+    if (questionType == 3) {
+      return JSON.stringify(bolQes);
+    }
     if (questionType == 4) {
       return JSON.stringify(singleDescriptiveQestion);
     }
@@ -140,6 +141,7 @@ function EditeProgramQuestion() {
                 class="form-select"
                 id="inputGroupSelect0"
                 onChange={handelTypeQuestion}
+                disabled="disabled"
               >
                 <option
                   value="0"
@@ -154,10 +156,22 @@ function EditeProgramQuestion() {
                   چند گزینه ایی متن بلند
                 </option>
                 <option
+                  value="3"
+                  selected={questionType == 3 ? "selected" : ""}
+                >
+                  صحیح / غلط
+                </option>
+                <option
                   value="4"
                   selected={questionType == 4 ? "selected" : ""}
                 >
                   تشریحی کامل
+                </option>
+                <option
+                  value="4"
+                  selected={questionType == 2 ? "selected" : ""}
+                >
+                  آپلود تصویر
                 </option>
               </select>
             </div>
@@ -176,11 +190,12 @@ function EditeProgramQuestion() {
               />
             )}
             {questionType == 3 && (
-              <EditDescriptiveQestion
-                descriptiveQestion={descriptiveQestion}
-                setDescriptiveQestion={setDescriptiveQestion}
+              <EditTrueFalse
+                bolQes={bolQes}
+                setBolQes={setBolQes}
               />
             )}
+
             {questionType == 4 && (
               <EditSingleDescriptiveQestion
                 singleDescriptiveQestion={

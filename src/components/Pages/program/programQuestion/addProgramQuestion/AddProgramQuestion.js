@@ -21,7 +21,8 @@ function AddProgramQuestion() {
     { qestion: "" },
   ]);
   const [bolQes, setBolQes] = useState([
-    { qestion1: "", qestion2: "" },
+    { qestion1: "" },
+    { qestion2: "" },
   ]);
   const [singleDescriptiveQestion, setSingleDescriptiveQestion] =
     useState();
@@ -57,6 +58,11 @@ function AddProgramQuestion() {
     if (questionType == 1) {
       return JSON.stringify(descriptiveQestion);
     }
+    if (questionType == 2) {
+      imageQestion.map((index, item) => {});
+
+      return "imageQestion";
+    }
     if (questionType == 3) {
       return JSON.stringify(bolQes);
     }
@@ -68,41 +74,40 @@ function AddProgramQuestion() {
   const HandelSubmit = (e) => {
     e.preventDefault();
 
-    console.log(handelFinalQestion());
     const formData = new FormData();
-
     formData.append("question", handelFinalQestion());
     formData.append("title_program_id", programItem.id);
     formData.append("type_of_question", questionType);
     formData.append("is_public", questionPolicy);
     formData.append("is_necessary", 1);
+    console.log(handelFinalQestion());
 
-    fetch(
-      "http://95.217.96.131:8080/api/admin/insert-question/",
-      {
-        // Adding method type
-        method: "POST",
-        // Adding body or contents to send
+    // fetch(
+    //   "http://95.217.96.131:8080/api/admin/insert-question/",
+    //   {
+    //     // Adding method type
+    //     method: "POST",
+    //     // Adding body or contents to send
 
-        // Adding headers to the request
-        headers: {
-          Authorization: accessToken,
-        },
+    //     // Adding headers to the request
+    //     headers: {
+    //       Authorization: accessToken,
+    //     },
 
-        body: formData,
-      }
-    )
-      // Converting to JSON
-      .then((response) => response.json())
-      // // Displaying results to console
-      .then((json) => {
-        console.log("ok", json[0].msg);
-        if (json[0].msg == "success") {
-          console.log();
-          // window.location.href = `/program/indexQuestion/${programItem.id}`;
-          navigate(-1);
-        }
-      });
+    //     body: formData,
+    //   }
+    // )
+    //   // Converting to JSON
+    //   .then((response) => response.json())
+    //   // // Displaying results to console
+    //   .then((json) => {
+    //     console.log("ok", json[0].msg);
+    //     if (json[0].msg == "success") {
+    //       console.log();
+    //       // window.location.href = `/program/indexQuestion/${programItem.id}`;
+    //       navigate(-1);
+    //     }
+    //   });
   };
 
   const handelOutPutJsonFormat = (value) => {

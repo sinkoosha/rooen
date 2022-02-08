@@ -55,74 +55,79 @@ function Login({
       });
 
       setConfarmCodeStatue(true);
-      //   console.log(mobil);
-      //   // main.js
+      console.log(mobil);
+      // main.js
 
-      //   // POST request using fetch()
-      // fetch("http://95.217.96.131:8080/api/checkuser", {
-      //   // Adding method type
-      //   method: "POST",
+      // POST request using fetch()
+      fetch("http://95.217.96.131:8080/api/checkuser", {
+        // Adding method type
+        method: "POST",
 
-      //   // Adding body or contents to send
-      //   body: JSON.stringify({
-      //     mobile: mobil,
-      //   }),
+        // Adding body or contents to send
+        body: JSON.stringify({
+          mobile: mobil,
+        }),
 
-      //   // Adding headers to the request
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Accept: "application/json, text-plain, */*",
-      //     "X-Requested-With": "XMLHttpRequest",
-      //   },
-      // })
-      // // Converting to JSON
-      //     .then((response) => response.json())
+        // Adding headers to the request
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json, text-plain, */*",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      })
+        // Converting to JSON
+        .then((response) => response.json())
 
-      //     // // Displaying results to console
-      //     .then((json) => {
-      //       console.log("");
-      //       if (json.status == "ok") {
-      //         setConfarmCodeStatue(true);
-      //       } else {
-      //         setemobilError("خطای ایی رخ داده است ");
-      //       }
-      //     });
+        // // Displaying results to console
+        .then((json) => {
+          console.log("");
+          if (json.status == "ok") {
+            setConfarmCodeStatue(true);
+          } else {
+            setemobilError("خطای ایی رخ داده است ");
+          }
+        });
     }
   };
 
   const codeSubmit = (e) => {
-    setAuthLogin(
-      "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC85NS4yMTcuOTYuMTMxOjgwODBcL2FwaVwvZ2V0YXV0aGNvZGUiLCJpYXQiOjE2NDI2MjUwNTQsImV4cCI6MTY1ODE3NzA1NCwibmJmIjoxNjQyNjI1MDU0LCJqdGkiOiJ5MDlGc0FIcFBYOU5BY2dLIiwic3ViIjoxNiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.30RY0e74WgEYnnkNh7GNrWUWmIWxH4BnJwKNvfQSR9g"
-    );
-    setApiInfo({
-      ...apiInfo,
-      accessToken:
-        "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC85NS4yMTcuOTYuMTMxOjgwODBcL2FwaVwvZ2V0YXV0aGNvZGUiLCJpYXQiOjE2NDI2MjUwNTQsImV4cCI6MTY1ODE3NzA1NCwibmJmIjoxNjQyNjI1MDU0LCJqdGkiOiJ5MDlGc0FIcFBYOU5BY2dLIiwic3ViIjoxNiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.30RY0e74WgEYnnkNh7GNrWUWmIWxH4BnJwKNvfQSR9g",
-    });
+    // setAuthLogin(
+    //   "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC85NS4yMTcuOTYuMTMxOjgwODBcL2FwaVwvZ2V0YXV0aGNvZGUiLCJpYXQiOjE2NDI2MjUwNTQsImV4cCI6MTY1ODE3NzA1NCwibmJmIjoxNjQyNjI1MDU0LCJqdGkiOiJ5MDlGc0FIcFBYOU5BY2dLIiwic3ViIjoxNiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.30RY0e74WgEYnnkNh7GNrWUWmIWxH4BnJwKNvfQSR9g"
+    // );
+    // setApiInfo({
+    //   ...apiInfo,
+    //   accessToken:
+    //     "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC85NS4yMTcuOTYuMTMxOjgwODBcL2FwaVwvZ2V0YXV0aGNvZGUiLCJpYXQiOjE2NDI2MjUwNTQsImV4cCI6MTY1ODE3NzA1NCwibmJmIjoxNjQyNjI1MDU0LCJqdGkiOiJ5MDlGc0FIcFBYOU5BY2dLIiwic3ViIjoxNiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.30RY0e74WgEYnnkNh7GNrWUWmIWxH4BnJwKNvfQSR9g",
+    // });
 
-    localStorage.setItem(
-      "accessToken",
-      "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC85NS4yMTcuOTYuMTMxOjgwODBcL2FwaVwvZ2V0YXV0aGNvZGUiLCJpYXQiOjE2NDI2MjUwNTQsImV4cCI6MTY1ODE3NzA1NCwibmJmIjoxNjQyNjI1MDU0LCJqdGkiOiJ5MDlGc0FIcFBYOU5BY2dLIiwic3ViIjoxNiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.30RY0e74WgEYnnkNh7GNrWUWmIWxH4BnJwKNvfQSR9g"
-    );
+    // localStorage.setItem(
+    //   "accessToken",
+    //   "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC85NS4yMTcuOTYuMTMxOjgwODBcL2FwaVwvZ2V0YXV0aGNvZGUiLCJpYXQiOjE2NDI2MjUwNTQsImV4cCI6MTY1ODE3NzA1NCwibmJmIjoxNjQyNjI1MDU0LCJqdGkiOiJ5MDlGc0FIcFBYOU5BY2dLIiwic3ViIjoxNiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.30RY0e74WgEYnnkNh7GNrWUWmIWxH4BnJwKNvfQSR9g"
+    // );
 
-    // e.preventDefault();
-    // fetch("http://95.217.96.131:8080/api/getauthcode", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     mobile: mobil,
-    //     code: confarmCode,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json, text-plain, */*",
-    //     "X-Requested-With": "XMLHttpRequest",
-    //   },
-    // })
-    //   .then((response) => response.json())
-    //   .then((json) => {
-    //     setAuthLogin(`bearer ${json.access_token}`);
-    //   });
-    // console.log("auth", authLogin);
+    e.preventDefault();
+    fetch("http://95.217.96.131:8080/api/getauthcode", {
+      method: "POST",
+      body: JSON.stringify({
+        mobile: mobil,
+        code: confarmCode,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text-plain, */*",
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        localStorage.setItem(
+          "accessToken",
+          `bearer ${json.access_token} `
+        );
+        localStorage.setItem("mobil", mobil);
+        setAuthLogin(`bearer ${json.access_token} `);
+      });
+    console.log("auth", authLogin);
   };
 
   return (
