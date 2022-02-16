@@ -78,8 +78,7 @@ function AddProgramQuestion() {
     formData.append("question", handelFinalQestion());
     formData.append("title_program_id", programItem.id);
     formData.append("type_of_question", questionType);
-    formData.append("is_public", questionPolicy);
-    formData.append("is_necessary", 1);
+    formData.append("is_necessary", questionPolicy);
     console.log(handelFinalQestion());
 
     fetch(
@@ -209,7 +208,7 @@ function AddProgramQuestion() {
 
             <div class=" mb-3">
               <label for="disabledTextInput" class="form-label">
-                خصوصی / عمومی
+                اهمیت
               </label>
               <select
                 class="form-select"
@@ -217,8 +216,8 @@ function AddProgramQuestion() {
                 onChange={handelquestionPolicy}
               >
                 <option selected>نوع</option>
-                <option value="0">خصوصی</option>
-                <option value="1">عمومی</option>
+                <option value="1">ضروری</option>
+                <option value="0">غیر ضروری</option>
               </select>
             </div>
 

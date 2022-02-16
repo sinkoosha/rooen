@@ -72,12 +72,12 @@ function EditeProgramQuestion() {
     formData.append("question", questionTitle);
     formData.append("question_id", questionitem.id);
     formData.append("type_of_question", questionType);
-    formData.append("is_public", questionPolicy);
+
     formData.append(
       "title_program_id",
       questionitem.title_program_id
     );
-    formData.append("is_necessary", 1);
+    formData.append("is_necessary", questionPolicy);
 
     e.preventDefault();
     fetch("http://95.217.96.131:8080/api/admin/edit-question", {
@@ -209,7 +209,7 @@ function EditeProgramQuestion() {
 
             <div class=" mb-3">
               <label for="disabledTextInput" class="form-label">
-                خصوصی / عمومی
+                اهمیت
               </label>
               <select
                 class="form-select"
@@ -222,7 +222,7 @@ function EditeProgramQuestion() {
                     questionPolicy == 0 ? "selected" : ""
                   }
                 >
-                  خصوصی
+                  غیر ضروری
                 </option>
                 <option
                   value="1"
@@ -230,7 +230,7 @@ function EditeProgramQuestion() {
                     questionPolicy == 1 ? "selected" : ""
                   }
                 >
-                  عمومی
+                  ضروری
                 </option>
               </select>
             </div>

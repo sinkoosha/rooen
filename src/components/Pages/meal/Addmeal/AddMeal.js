@@ -155,6 +155,7 @@ function AddMeal() {
                 <option value="0">صبحانه</option>
                 <option value="1">ناهار</option>
                 <option value="2">شام</option>
+                <option value="3">میان وعده</option>
               </select>
             </div>
 
