@@ -2,12 +2,15 @@ import React, { useContext, useState } from "react";
 import auth from "../../../../contax/authContax";
 import axios from "axios";
 import { Route } from "react-router-dom";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function AddProgram() {
   const [programTitle, SetProgramTitle] = useState();
   const [programType, setProgramType] = useState();
   const [programFileUpload, setProgramFile] = useState();
   const [programFileUploadName, setProgramFileName] = useState();
+  const [loadIng, setLoadIng] = useState(false);
 
   const handelTitleProgram = (e) => {
     SetProgramTitle(e.target.value);
@@ -23,6 +26,7 @@ function AddProgram() {
   const accessToken = localStorage.getItem("accessToken");
 
   const HandelSubmit = (e) => {
+    setLoadIng(true);
     e.preventDefault();
     const formData = new FormData();
 
@@ -105,6 +109,13 @@ function AddProgram() {
             <button type="submit" class="btn btn-primary">
               اضافه کردن
             </button>
+            {loadIng && (
+              <>
+                <Box sx={{ display: "flex", marginTop: "30px" }}>
+                  <CircularProgress />
+                </Box>
+              </>
+            )}
           </form>
         </div>
       </div>

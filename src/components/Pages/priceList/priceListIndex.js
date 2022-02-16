@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-
+import Box from "@mui/material/Box";
 import PregnantWomanOutlinedIcon from "@mui/icons-material/PregnantWomanOutlined";
+import CircularProgress from "@mui/material/CircularProgress";
 import ManOutlinedIcon from "@mui/icons-material/ManOutlined";
 import WomanOutlinedIcon from "@mui/icons-material/WomanOutlined";
 import CachedSharpIcon from "@mui/icons-material/CachedSharp";
@@ -134,13 +135,11 @@ function PriceListIndex() {
                 )
               ) : (
                 <>
-                  <div>اطلاعاتی یافت نشد</div>
-                  <button
-                    className=""
-                    onChange={handelPriceListRefresh}
-                  >
-                    <CachedSharpIcon />
-                  </button>
+                  <>
+                    <Box sx={{ display: "flex" }}>
+                      <CircularProgress />
+                    </Box>
+                  </>
                 </>
               )}
             </tbody>

@@ -4,6 +4,10 @@ import PregnantWomanOutlinedIcon from "@mui/icons-material/PregnantWomanOutlined
 import ManOutlinedIcon from "@mui/icons-material/ManOutlined";
 import WomanOutlinedIcon from "@mui/icons-material/WomanOutlined";
 import CachedSharpIcon from "@mui/icons-material/CachedSharp";
+import Switch from "@mui/material/Switch";
+
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 import {
   Link,
   useParams,
@@ -99,13 +103,9 @@ function IllnessIndex() {
                 )
               ) : (
                 <>
-                  <div>اطلاعاتی یافت نشد</div>
-                  <button
-                    className=""
-                    onChange={handelIllnessRefresh}
-                  >
-                    <CachedSharpIcon />
-                  </button>
+                  <Box sx={{ display: "flex" }}>
+                    <CircularProgress />
+                  </Box>
                 </>
               )}
             </tbody>

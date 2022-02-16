@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import auth from "../../../../contax/authContax";
-
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   Link,
   useLocation,
@@ -18,6 +19,7 @@ function AddMeal() {
   const [illnessId, setIllnessId] = useState(null);
   const [refresh, setRefresh] = useState();
   const [description, SetDescription] = useState();
+  const [loadIng, setLoadIng] = useState(true);
 
   const hanelDetailsMeals = (e) => {
     setDetailsMeal(e.target.value);
@@ -207,7 +209,20 @@ function AddMeal() {
     </div>
   ) : (
     <div className="indexHome ">
-      <p>در حال لود</p>
+      {loadIng && (
+        <>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "30px",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        </>
+      )}
     </div>
   );
 }

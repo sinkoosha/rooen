@@ -6,6 +6,10 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+
 function EditProgram() {
   const Nav = useNavigate();
   const [programTitle, SetProgramTitle] = useState(
@@ -14,6 +18,9 @@ function EditProgram() {
   const [programType, setProgramType] = useState(
     useLocation().state.diet_type
   );
+  const [loadIng, setLoadIng] = useState(false);
+
+  const [programImage, setProgramImage] = useState(null);
   const itemId = useLocation().state.id;
 
   const handelTitleProgram = (e) => {
@@ -24,11 +31,20 @@ function EditProgram() {
     e.persist();
     setProgramType(e.target.value);
   };
+  const handelImageProgarm = (e) => {
+    e.persist();
+    setProgramImage(e.target.files[0]);
+  };
 
   const accessToken = localStorage.getItem("accessToken");
-
+  const formData = new FormData();
+  formData.append("name", programTitle);
+  formData.append("diet_type", programType);
+  formData.append("tile_program_id", itemId);
+  formData.append("image", programImage);
   const HandelSubmit = (e) => {
     e.preventDefault();
+    setLoadIng(true);
     fetch(
       "http://95.217.96.131:8080/api/admin/edit-titleprogram/",
       {
@@ -38,17 +54,10 @@ function EditProgram() {
 
         // Adding headers to the request
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json, text-plain, */*",
-          "X-Requested-With": "XMLHttpRequest",
           Authorization: accessToken,
         },
 
-        body: JSON.stringify({
-          name: programTitle,
-          diet_type: programType,
-          tile_program_id: itemId,
-        }),
+        body: formData,
       }
     )
       // Converting to JSON
@@ -103,10 +112,34 @@ function EditProgram() {
                 </option>
               </select>
             </div>
+            <div class=" mb-3">
+              <label for="disabledTextInput" class="form-label">
+                ویرایش تصویر
+              </label>
+              <img
+                src={`http://95.217.96.131:8080/storage/images/${
+                  useLocation().state.image
+                }`}
+                className="img-thumbnail rounded mx-auto d-block mt-3 mb-3"
+              />
+              <input
+                type="file"
+                id="disabledTextInput"
+                placeholder="نام برنامه"
+                onChange={handelImageProgarm}
+              />
+            </div>
 
             <button type="submit" class="btn btn-primary">
               ویرایش برنامه
             </button>
+            {loadIng && (
+              <>
+                <Box sx={{ display: "flex", marginTop: "30px" }}>
+                  <CircularProgress />
+                </Box>
+              </>
+            )}
           </form>
         </div>
       </div>

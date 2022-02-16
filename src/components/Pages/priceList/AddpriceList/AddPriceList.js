@@ -6,6 +6,8 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function AddpriceList() {
   const [priceListTitle, setPriceListTitle] = useState();
@@ -19,6 +21,7 @@ function AddpriceList() {
   };
   const [refresh, setRefresh] = useState();
   const [ProgramType, setProgramType] = useState(1);
+  const [loadIng, setLoadIng] = useState(true);
 
   const handelPrice = (e) => {
     setPrice(e.target.value);
@@ -163,7 +166,20 @@ function AddpriceList() {
     </div>
   ) : (
     <div className="indexHome ">
-      <p>در حال لود</p>
+      {loadIng && (
+        <>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "30px",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        </>
+      )}
     </div>
   );
 }

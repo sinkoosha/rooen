@@ -30,8 +30,11 @@ import EditMeals from "../../Pages/meal/EditMeals/EditMeals";
 import AddKeyWord from "../../Pages/keyWord/AddIKeyWord/AddKeyWord";
 import KeyWordIndex from "../../Pages/keyWord/KeyWordIndex";
 import EditKeyWord from "../../Pages/keyWord/editKeyWord/EditWord";
+import IndexExpertsRequest from "../../Pages/IndecExpertsRequest/IndexExpertsRequest";
+import ExpertReqestProfile from "../../Pages/expertReqestProfile/ExpertReqestProfile";
 
 function Dashboard() {
+  const [refreshItem, setRefreshItem] = useState(0);
   return (
     <>
       <Topnavbar />
@@ -67,6 +70,24 @@ function Dashboard() {
             <Route
               path="/editQes/:id"
               element={<EditeProgramQuestion />}
+            ></Route>
+            <Route
+              path="/indexExpertRequest"
+              element={
+                <IndexExpertsRequest
+                  refreshItem={refreshItem}
+                  setRefreshItem={setRefreshItem}
+                />
+              }
+            ></Route>
+            <Route
+              path="/expertReqest/:id"
+              element={
+                <ExpertReqestProfile
+                  refreshItem={refreshItem}
+                  setRefreshItem={setRefreshItem}
+                />
+              }
             ></Route>
             <Route
               path="/Illness"

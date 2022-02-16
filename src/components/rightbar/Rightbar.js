@@ -14,6 +14,12 @@ import {
   ChatBubbleOutline,
   WorkOutline,
   Report,
+  AddShoppingCart,
+  FoodBank,
+  MenuBook,
+  Keyboard,
+  Accessible,
+  AlarmAdd,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
@@ -62,7 +68,7 @@ export default function Rightbar() {
                 مدیریت کار شناس ها
               </li>
             </Link>
-            <Link to="/test" className="link">
+            <Link to="/indexExpertRequest" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
                 مدیریت در خواست ها
@@ -77,13 +83,13 @@ export default function Rightbar() {
             <ul className="sidebarList">
               <Link to="/addProgram" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <AlarmAdd className="sidebarIcon" />
                   افزودن برنامه
                 </li>
               </Link>
               <Link to="/program" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <AlarmAdd className="sidebarIcon" />
                   مشاهده برنامه
                 </li>
               </Link>
@@ -97,13 +103,13 @@ export default function Rightbar() {
             <ul className="sidebarList">
               <Link to="/addMeal" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <FoodBank className="sidebarIcon" />
                   افزودن وعده غذایی
                 </li>
               </Link>
               <Link to="/meals" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <MenuBook className="sidebarIcon" />
                   مشاهده وعده غذایی
                 </li>
               </Link>
@@ -117,13 +123,13 @@ export default function Rightbar() {
             <ul className="sidebarList">
               <Link to="/addIllness" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <Accessible className="sidebarIcon" />
                   افزودن بیماری
                 </li>
               </Link>
               <Link to="/illness" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <Accessible className="sidebarIcon" />
                   مشاهده بیماری
                 </li>
               </Link>
@@ -137,13 +143,13 @@ export default function Rightbar() {
             <ul className="sidebarList">
               <Link to="/addkeyword" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <Keyboard className="sidebarIcon" />
                   افزودن کلید واژه
                 </li>
               </Link>
               <Link to="/keyword" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <Keyboard className="sidebarIcon" />
                   مدیریت کلید واژه
                 </li>
               </Link>
@@ -157,13 +163,13 @@ export default function Rightbar() {
             <ul className="sidebarList">
               <Link to="/addpriceList" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <AddShoppingCart className="sidebarIcon" />
                   افزودن لیست قیمت
                 </li>
               </Link>
               <Link to="/priceList" className="link">
                 <li className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
+                  <AddShoppingCart className="sidebarIcon" />
                   مشاهده لیست قیمت
                 </li>
               </Link>

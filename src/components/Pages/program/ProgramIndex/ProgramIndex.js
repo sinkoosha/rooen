@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import auth from "../../../../contax/authContax";
-
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 import PregnantWomanOutlinedIcon from "@mui/icons-material/PregnantWomanOutlined";
 import ManOutlinedIcon from "@mui/icons-material/ManOutlined";
 import WomanOutlinedIcon from "@mui/icons-material/WomanOutlined";
@@ -88,10 +89,9 @@ function ProgramIndex() {
                 ))
               ) : (
                 <>
-                  <div>اطلاعاتی یافت نشد</div>
-                  <button onClick={handelExpertsRefresh}>
-                    <CachedSharpIcon />
-                  </button>
+                  <Box sx={{ display: "flex" }}>
+                    <CircularProgress />
+                  </Box>
                 </>
               )}
             </tbody>

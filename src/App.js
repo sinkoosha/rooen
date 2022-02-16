@@ -16,6 +16,7 @@ import Dashboard from "./components/layout/dashboard/Dashboard";
 import auth from "./contax/authContax";
 
 function App() {
+  const [mobil, setMobil] = useState("");
   const [authLogin, setAuthLogin] = useState();
   const [apiInfo, setApiInfo] = useState({});
   localStorage.getItem("accessToken")
