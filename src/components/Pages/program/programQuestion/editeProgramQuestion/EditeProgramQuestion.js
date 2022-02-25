@@ -9,8 +9,10 @@ import {
 } from "react-router-dom";
 import EditDescriptiveQestion from "../../../../layout/EditQestion/EditDescriptiveQestion/EditDescriptiveQestion";
 import EditTrueFalse from "../../../../layout/EditQestion/EditTrueFalse/EditTrueFalse";
+import EditImageQestion from "../../../../layout/EditQestion/ImageQestion/EditImageQestion";
 import EditMultiQestion from "../../../../layout/EditQestion/multiQestion/EditMultiQestion";
 import EditSingleDescriptiveQestion from "../../../../layout/EditQestion/ٍEditSingleDescriptiveQestion/EditSingleDescriptiveQestion";
+
 function EditeProgramQuestion() {
   const nav = useNavigate();
   const questionitem = useLocation().state;
@@ -29,16 +31,25 @@ function EditeProgramQuestion() {
   );
   const [isNecessary, setIsNecessary] = useState(1);
   const [inputShortQes, setInputShortQes] = useState(
-    JSON.parse(questionitem.options_question)
+    questionitem.type_of_question == 7
+      ? questionitem.options_question
+      : JSON.parse(questionitem.options_question)
   );
   const [singleDescriptiveQestion, setSingleDescriptiveQestion] =
-    useState(JSON.parse(questionitem.options_question));
+    useState(
+      questionitem.type_of_question == 7 &&
+        questionitem.options_question
+    );
 
   const [descriptiveQestion, setDescriptiveQestion] = useState(
-    JSON.parse(questionitem.options_question)
+    questionitem.type_of_question == 7
+      ? questionitem.options_question
+      : JSON.parse(questionitem.options_question)
   );
   const [bolQes, setBolQes] = useState(
-    JSON.parse(questionitem.options_question)
+    questionitem.type_of_question == 7
+      ? questionitem.options_question
+      : JSON.parse(questionitem.options_question)
   );
 
   const handelTitleQuestion = (e) => {
@@ -65,10 +76,11 @@ function EditeProgramQuestion() {
     if (questionType == 1) {
       return JSON.stringify(descriptiveQestion);
     }
-    if (questionType == 3) {
-      return JSON.stringify(bolQes);
-    }
     if (questionType == 4) {
+      return JSON.stringify(bolQes);
+      console.log("bolqes", bolQes);
+    }
+    if (questionType == 6) {
       return JSON.stringify(singleDescriptiveQestion);
     }
   };
@@ -104,7 +116,7 @@ function EditeProgramQuestion() {
       // // Displaying results to console
       .then((json) => {
         if (json[0].msg == "success") {
-          // nav(-1);
+          nav(-1);
         }
       });
   };
@@ -186,6 +198,7 @@ function EditeProgramQuestion() {
                 setDescriptiveQestion={setDescriptiveQestion}
               />
             )}
+
             {questionType == 4 && (
               <EditTrueFalse
                 bolQes={bolQes}
@@ -203,6 +216,8 @@ function EditeProgramQuestion() {
                 }
               />
             )}
+
+            {questionType == 7 && <EditImageQestion />}
 
             <div class=" mb-3">
               <label for="disabledTextInput" class="form-label">

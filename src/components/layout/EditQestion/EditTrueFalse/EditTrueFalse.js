@@ -20,7 +20,7 @@ function EditTrueFalse({ bolQes, setBolQes }) {
             onChange={handleInputChange}
             value={bolQes[0].qestion}
           ></textarea>
-          <pre></pre>
+          {/* <pre>{JSON.stringify(bolQes, null, 2)}</pre> */}
         </div>
       </div>
     </div>
