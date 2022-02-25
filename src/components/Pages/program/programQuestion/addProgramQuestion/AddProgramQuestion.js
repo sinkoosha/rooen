@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Nav } from "react-bootstrap";
 
 import {
   Link,
@@ -9,6 +10,7 @@ import DescriptiveQestion from "../../../../layout/DescriptiveQestion/Descriptiv
 import ImageQestion from "../../../../layout/ImageQestion/ImageQestion";
 import MultiQestionWimage from "../../../../layout/MultiQestionWImage/MultiQestionWimage";
 import MultiQestionShortly from "../../../../layout/mutiqestion-Shortly/multiQestionShortly";
+import MultiQestionShortlyWimage from "../../../../layout/mutiqestionShortlyWimage/multiQestionShortlyWimage";
 import SingleDescriptiveQestion from "../../../../layout/SingleDescriptiveQestion/SingleDescriptiveQestion";
 import TrueFalse from "../../../../layout/trueFalse/TrueFalse";
 
@@ -20,10 +22,10 @@ function AddProgramQuestion() {
   const [inputShortQes, setInputShortQes] = useState([
     { qestion: "" },
   ]);
-  const [bolQes, setBolQes] = useState([
-    { qestion1: "" },
-    { qestion2: "" },
-  ]);
+
+  const [isDuration, setIsduration] = useState(0);
+
+  const [bolQes, setBolQes] = useState();
   const [singleDescriptiveQestion, setSingleDescriptiveQestion] =
     useState();
 
@@ -32,12 +34,14 @@ function AddProgramQuestion() {
   ]);
   const [finalQestion, setFinalQestion] = useState();
   const [imageQestion, setImageQestion] = useState([
-    { qestion: "" },
+    { qestion: "", imgqes: "" },
   ]);
 
   const navigate = useNavigate();
   const programItem = useLocation().state;
-
+  const handelisDuration = (e) => {
+    setIsduration(e.target.value);
+  };
   const handelTitleQuestion = (e) => {
     setQuestionTitle(e.target.value);
     console.log(questionTitle);
@@ -50,7 +54,7 @@ function AddProgramQuestion() {
     console.log(questionPolicy);
   };
   const accessToken = localStorage.getItem("accessToken");
-
+  const formData = new FormData();
   const handelFinalQestion = () => {
     if (questionType == 0) {
       return JSON.stringify(inputShortQes);
@@ -58,28 +62,39 @@ function AddProgramQuestion() {
     if (questionType == 1) {
       return JSON.stringify(descriptiveQestion);
     }
-    if (questionType == 2) {
-      imageQestion.map((index, item) => {});
-
+    if (questionType == 3) {
+      return JSON.stringify(imageQestion);
+      imageQestion.map((item, index) => {
+        formData.append(`photo${index + 1}`, item.imgqes);
+      });
+    }
+    if (questionType == 7) {
       return "imageQestion";
     }
-    if (questionType == 3) {
+    if (questionType == 4) {
+      console.log(JSON.stringify(bolQes));
       return JSON.stringify(bolQes);
     }
-    if (questionType == 4) {
+    if (questionType == 5) {
       return JSON.stringify(singleDescriptiveQestion);
     }
   };
 
   const HandelSubmit = (e) => {
     e.preventDefault();
-
     const formData = new FormData();
-    formData.append("question", handelFinalQestion());
+    if (questionType == 3) {
+      imageQestion.map((item, index) => {
+        formData.append(`photo${index + 1}`, item.imgqes);
+        console.log(index);
+      });
+    }
+    formData.append("title_question", questionTitle);
+    formData.append("options_question", handelFinalQestion());
     formData.append("title_program_id", programItem.id);
     formData.append("type_of_question", questionType);
     formData.append("is_necessary", questionPolicy);
-    console.log(handelFinalQestion());
+    formData.append("is_duration", isDuration);
 
     fetch(
       "http://95.217.96.131:8080/api/admin/insert-question/",
@@ -154,12 +169,12 @@ function AddProgramQuestion() {
                   چند گزینه ایی متن کوتاه
                 </option>
                 <option value="1">چند گزینه ایی متن بلند</option>
-                <option value="2">
+                <option value="3">
                   چند گزیته ایی متن و عکس
                 </option>
-                <option value="3">بله / خیر</option>
-                <option value="4">تشریحی متن کامل</option>
-                <option value="5">آپلود عکس</option>
+                <option value="4">بله / خیر</option>
+                <option value="5">تشریحی متن کامل</option>
+                <option value="7">آپلود عکس</option>
               </select>
             </div>
             {questionType == 0 && (
@@ -174,22 +189,18 @@ function AddProgramQuestion() {
                 setDescriptiveQestion={setDescriptiveQestion}
               />
             )}
-            {questionType == 2 && (
+            {questionType == 3 && (
               <>
-                <ImageQestion
+                <MultiQestionShortlyWimage
                   imageQestion={imageQestion}
                   setImageQestion={setImageQestion}
                 />
-                <MultiQestionShortly
-                  inputShortQes={inputShortQes}
-                  setInputShortQes={setInputShortQes}
-                />
               </>
             )}
-            {questionType == 3 && (
+            {questionType == 4 && (
               <TrueFalse bolQes={bolQes} setBolQes={setBolQes} />
             )}
-            {questionType == 4 && (
+            {questionType == 5 && (
               <SingleDescriptiveQestion
                 singleDescriptiveQestion={
                   singleDescriptiveQestion
@@ -199,12 +210,7 @@ function AddProgramQuestion() {
                 }
               />
             )}
-            {questionType == 5 && (
-              <ImageQestion
-                imageQestion={imageQestion}
-                setImageQestion={setImageQestion}
-              />
-            )}
+            {questionType == 7 && <ImageQestion />}
 
             <div class=" mb-3">
               <label for="disabledTextInput" class="form-label">
@@ -218,6 +224,20 @@ function AddProgramQuestion() {
                 <option selected>نوع</option>
                 <option value="1">ضروری</option>
                 <option value="0">غیر ضروری</option>
+              </select>
+            </div>
+            <div class=" mb-3">
+              <label for="disabledTextInput" class="form-label">
+                سوالات دوره ایی
+              </label>
+              <select
+                class="form-select"
+                id="inputGroupSelect1"
+                onChange={(e) => handelisDuration(e)}
+              >
+                <option selected>نوع</option>
+                <option value="1">بلی</option>
+                <option value="0">خیر</option>
               </select>
             </div>
 

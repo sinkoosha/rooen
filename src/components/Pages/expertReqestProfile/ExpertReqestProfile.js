@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import "./ExpertProfile.css";
 import ManOutlinedIcon from "@mui/icons-material/ManOutlined";
 import WomanOutlinedIcon from "@mui/icons-material/WomanOutlined";
+
 import Switch from "@mui/material/Switch";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -10,7 +11,7 @@ import auth from "../../../contax/authContax";
 function ExpertReqestProfile({ refreshItem, setRefreshItem }) {
   const accessToken = localStorage.getItem("accessToken");
   const experts = useLocation().state;
-
+  const [loading, setLoading] = useState(false);
   const [fetchExpres, setfetchExpres] = useState(null);
   const [fetchExpresRequest, setfetchExpresRequest] =
     useState(null);
@@ -28,7 +29,7 @@ function ExpertReqestProfile({ refreshItem, setRefreshItem }) {
   const expertsRequestIndex = () => {
     // POST request using fetch()
     fetch(
-      "http://95.217.96.131:8080/api/admin/index-expert-request",
+      "http://95.217.96.131:8080/api/admin/index-expert-request/all",
       {
         // Adding method type
         method: "GET",
@@ -47,11 +48,13 @@ function ExpertReqestProfile({ refreshItem, setRefreshItem }) {
       .then((response) => response.json())
       // // Displaying results to console
       .then((json) => {
-        setfetchExpresRequest(json.data);
+        setfetchExpresRequest(json.data.data);
+        setLoading(false);
       });
   };
 
   const expertStatusSwitch = (requsetId, status) => {
+    setLoading(true);
     fetch(
       "http://95.217.96.131:8080/api/admin/change-expert-request",
       {
@@ -81,7 +84,7 @@ function ExpertReqestProfile({ refreshItem, setRefreshItem }) {
   useEffect(() => {
     expertsRequestIndex();
     fetchProfile();
-  }, []);
+  }, [refreshItem]);
 
   const fetchProfile = () => {
     if (fetchExpresRequest) {
@@ -161,6 +164,12 @@ function ExpertReqestProfile({ refreshItem, setRefreshItem }) {
                                 "aria-label": "controlled",
                               }}
                             />
+
+                            {loading && (
+                              <Box sx={{ display: "flex" }}>
+                                <CircularProgress />
+                              </Box>
+                            )}
                           </h6>
                         </div>
                         <div class="col-sm-6">

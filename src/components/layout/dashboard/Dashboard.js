@@ -32,6 +32,7 @@ import KeyWordIndex from "../../Pages/keyWord/KeyWordIndex";
 import EditKeyWord from "../../Pages/keyWord/editKeyWord/EditWord";
 import IndexExpertsRequest from "../../Pages/IndecExpertsRequest/IndexExpertsRequest";
 import ExpertReqestProfile from "../../Pages/expertReqestProfile/ExpertReqestProfile";
+import ChatApp from "../../Pages/chatApp/ChatApp";
 
 function Dashboard() {
   const [refreshItem, setRefreshItem] = useState(0);
@@ -135,6 +136,7 @@ function Dashboard() {
               path="/editkeyword/:id"
               element={<EditKeyWord />}
             ></Route>
+            <Route path="/ChatApp" element={<ChatApp />}></Route>
           </Routes>
         </BrowserRouter>
       </div>

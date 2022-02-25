@@ -176,6 +176,20 @@ export default function Rightbar() {
             </ul>
           </div>
         </div>
+
+        <div className="sidebarWrapper">
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">مدیریت گفتوگو</h3>
+            <ul className="sidebarList">
+              <Link to="/ChatApp" className="link">
+                <li className="sidebarListItem">
+                  <AddShoppingCart className="sidebarIcon" />
+                  مشاهده گفتوگو
+                </li>
+              </Link>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

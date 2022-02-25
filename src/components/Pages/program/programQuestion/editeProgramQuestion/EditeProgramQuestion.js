@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Nav } from "react-bootstrap";
 
 import {
   Link,
@@ -15,7 +16,10 @@ function EditeProgramQuestion() {
   const questionitem = useLocation().state;
   console.log("qestion", questionitem);
   const [questionTitle, setQuestionTitle] = useState(
-    questionitem.question
+    questionitem.title_question
+  );
+  const [isDuration, setIsduration] = useState(
+    questionitem.is_duration
   );
   const [questionType, setQuestionType] = useState(
     questionitem.type_of_question
@@ -25,16 +29,16 @@ function EditeProgramQuestion() {
   );
   const [isNecessary, setIsNecessary] = useState(1);
   const [inputShortQes, setInputShortQes] = useState(
-    JSON.parse(questionitem.question)
+    JSON.parse(questionitem.options_question)
   );
   const [singleDescriptiveQestion, setSingleDescriptiveQestion] =
-    useState(JSON.parse(questionitem.question));
+    useState(JSON.parse(questionitem.options_question));
 
   const [descriptiveQestion, setDescriptiveQestion] = useState(
-    JSON.parse(questionitem.question)
+    JSON.parse(questionitem.options_question)
   );
   const [bolQes, setBolQes] = useState(
-    JSON.parse(questionitem.question)
+    JSON.parse(questionitem.options_question)
   );
 
   const handelTitleQuestion = (e) => {
@@ -49,8 +53,11 @@ function EditeProgramQuestion() {
     setQuestionPolicy(e.target.value);
     console.log(questionPolicy);
   };
-
+  const formData = new FormData();
   const accessToken = localStorage.getItem("accessToken");
+  const handelisDuration = (e) => {
+    setIsduration(e.target.value);
+  };
   const handelFinalQestion = () => {
     if (questionType == 0) {
       return JSON.stringify(inputShortQes);
@@ -67,17 +74,17 @@ function EditeProgramQuestion() {
   };
 
   const HandelSubmit = (e) => {
-    const formData = new FormData();
-
-    formData.append("question", questionTitle);
+    formData.append("title_question", questionTitle);
     formData.append("question_id", questionitem.id);
     formData.append("type_of_question", questionType);
+    formData.append("options_question", handelFinalQestion());
 
     formData.append(
       "title_program_id",
       questionitem.title_program_id
     );
     formData.append("is_necessary", questionPolicy);
+    formData.append("is_duration", isDuration);
 
     e.preventDefault();
     fetch("http://95.217.96.131:8080/api/admin/edit-question", {
@@ -87,27 +94,17 @@ function EditeProgramQuestion() {
 
       // Adding headers to the request
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json, text-plain, */*",
-        "X-Requested-With": "XMLHttpRequest",
         Authorization: accessToken,
       },
 
-      body: JSON.stringify({
-        question: handelFinalQestion(),
-        question_id: questionitem.id,
-        type_of_question: questionType,
-        is_public: questionPolicy,
-        title_program_id: questionitem.title_program_id,
-        is_necessary: "1",
-      }),
+      body: formData,
     })
       // Converting to JSON
       .then((response) => response.json())
       // // Displaying results to console
       .then((json) => {
         if (json[0].msg == "success") {
-          nav(-1);
+          // nav(-1);
         }
       });
   };
@@ -156,20 +153,20 @@ function EditeProgramQuestion() {
                   چند گزینه ایی متن بلند
                 </option>
                 <option
-                  value="3"
-                  selected={questionType == 3 ? "selected" : ""}
+                  value="4"
+                  selected={questionType == 4 ? "selected" : ""}
                 >
                   صحیح / غلط
                 </option>
                 <option
-                  value="4"
-                  selected={questionType == 4 ? "selected" : ""}
+                  value="6"
+                  selected={questionType == 6 ? "selected" : ""}
                 >
                   تشریحی کامل
                 </option>
                 <option
-                  value="4"
-                  selected={questionType == 2 ? "selected" : ""}
+                  value="7"
+                  selected={questionType == 7 ? "selected" : ""}
                 >
                   آپلود تصویر
                 </option>
@@ -189,14 +186,14 @@ function EditeProgramQuestion() {
                 setDescriptiveQestion={setDescriptiveQestion}
               />
             )}
-            {questionType == 3 && (
+            {questionType == 4 && (
               <EditTrueFalse
                 bolQes={bolQes}
                 setBolQes={setBolQes}
               />
             )}
 
-            {questionType == 4 && (
+            {questionType == 6 && (
               <EditSingleDescriptiveQestion
                 singleDescriptiveQestion={
                   singleDescriptiveQestion
@@ -234,8 +231,29 @@ function EditeProgramQuestion() {
                 </option>
               </select>
             </div>
-
-            <div></div>
+            <div class=" mb-3">
+              <label for="disabledTextInput" class="form-label">
+                سوالات دوره ایی
+              </label>
+              <select
+                class="form-select"
+                id="inputGroupSelect1"
+                onChange={(e) => handelisDuration(e)}
+              >
+                <option
+                  value="1"
+                  selected={isDuration == 1 && "selected"}
+                >
+                  بلی
+                </option>
+                <option
+                  value="0"
+                  selected={isDuration == 0 && "selected"}
+                >
+                  خیر
+                </option>
+              </select>
+            </div>
 
             <button type="submit" class="btn btn-primary">
               ویرایش کردن

@@ -86,7 +86,7 @@ function ProgramQuestion() {
                   fetchQuestion.map((item) => (
                     <tr>
                       <th scope="row">{counter++}</th>
-                      <td>{item.question}</td>
+                      <td>{item.title_question}</td>
 
                       <td>
                         <Link

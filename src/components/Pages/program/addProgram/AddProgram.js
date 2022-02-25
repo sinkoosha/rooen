@@ -4,7 +4,7 @@ import axios from "axios";
 import { Route } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import "./addprogram.css";
 function AddProgram() {
   const [programTitle, SetProgramTitle] = useState();
   const [programType, setProgramType] = useState();

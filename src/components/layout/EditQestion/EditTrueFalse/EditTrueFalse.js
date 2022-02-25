@@ -1,33 +1,27 @@
 import React from "react";
 
 function EditTrueFalse({ bolQes, setBolQes }) {
-  const handelChange = (e, index) => {
-    const { name, value } = e.target;
-    console.log(bolQes);
+  const handleInputChange = (e) => {
+    const { value } = e.target;
     const list = [...bolQes];
-    list[index][name] = value;
+    list[0].qestion = value;
     setBolQes(list);
   };
 
   return (
     <div>
-      <div class="input-group short-item">
-        <input
-          value={bolQes[0].qestion1}
-          name="qestion1"
-          type="text"
-          class="form-control"
-          placeholder="سوال یک"
-          onChange={(e) => handelChange(e, 0)}
-        />
-        <input
-          value={bolQes[1].qestion2}
-          name="qestion2"
-          type="text"
-          class="form-control"
-          placeholder="سوال 2"
-          onChange={(e) => handelChange(e, 1)}
-        />
+      <div>
+        <div class="input-group short-item">
+          <textarea
+            name="qestion"
+            class="form-control"
+            rows="3"
+            placeholder="صحیح غلط"
+            onChange={handleInputChange}
+            value={bolQes[0].qestion}
+          ></textarea>
+          <pre></pre>
+        </div>
       </div>
     </div>
   );

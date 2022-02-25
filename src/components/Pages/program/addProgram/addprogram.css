@@ -1,0 +1,12 @@
+.label-danger {
+  background-color: red;
+  color: white;
+  padding: 10px;
+}
+
+.imageQestion {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}

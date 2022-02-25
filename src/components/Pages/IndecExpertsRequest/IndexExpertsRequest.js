@@ -14,6 +14,7 @@ function IndexExpertRequest({ refreshItem, setRefreshItem }) {
   const [fetchExpres, setfetchExpres] = useState(null);
   const [fetchExpresRequest, setfetchExpresRequest] =
     useState(null);
+  const [allR, setAllR] = useState(true);
 
   const expertsIndex = () => {
     // POST request using fetch()
@@ -40,7 +41,9 @@ function IndexExpertRequest({ refreshItem, setRefreshItem }) {
   const expertsRequestIndex = () => {
     // POST request using fetch()
     fetch(
-      "http://95.217.96.131:8080/api/admin/index-expert-request",
+      allR
+        ? "http://95.217.96.131:8080/api/admin/index-expert-request/all"
+        : "http://95.217.96.131:8080/api/admin/index-expert-request/",
       {
         // Adding method type
         method: "GET",
@@ -59,7 +62,10 @@ function IndexExpertRequest({ refreshItem, setRefreshItem }) {
       .then((response) => response.json())
       // // Displaying results to console
       .then((json) => {
-        setfetchExpresRequest(json.data);
+        allR
+          ? setfetchExpresRequest(json.data.data)
+          : setfetchExpresRequest(json.data);
+        setRefreshItem(refreshItem + 1);
       });
   };
 
@@ -72,6 +78,11 @@ function IndexExpertRequest({ refreshItem, setRefreshItem }) {
   useEffect(() => {
     expertsIndex();
     expertsRequestIndex();
+  }, [allR]);
+
+  useEffect(() => {
+    fetchExpresRequest &&
+      console.log("fetchExpresRequest =", fetchExpresRequest);
   }, [refreshItem]);
 
   const genderHandele = (value) => {
@@ -80,6 +91,12 @@ function IndexExpertRequest({ refreshItem, setRefreshItem }) {
     } else {
       return <WomanOutlinedIcon>زن</WomanOutlinedIcon>;
     }
+  };
+  const handelfilter = (e) => {
+    const { value } = e.target;
+    value == 0 && setAllR(false);
+    value == 1 && setAllR(true);
+    setfetchExpres(null);
   };
   const statusHandele = (value) => {
     if (value == 0) {
@@ -99,6 +116,36 @@ function IndexExpertRequest({ refreshItem, setRefreshItem }) {
       <div class="card">
         <div class="card-header">مدیریت درخواست ها</div>
         <div class="card-body">
+          <div className="filterBtn">
+            <button
+              value="1"
+              type="button"
+              class={
+                allR
+                  ? `btn  btn-sm btn-danger`
+                  : `btn btn-secondary  btn-sm`
+              }
+              onClick={(e) => {
+                handelfilter(e);
+              }}
+            >
+              همه در خواست ها
+            </button>
+            <button
+              value="0"
+              type="button"
+              class={
+                allR
+                  ? `btn btn-secondary  btn-sm `
+                  : `btn   btn-sm btn-danger`
+              }
+              onClick={(e) => {
+                handelfilter(e);
+              }}
+            >
+              در خواست های جدید
+            </button>
+          </div>
           <table class="table table-bordered table-wetAsfalt">
             <thead>
               <tr>
