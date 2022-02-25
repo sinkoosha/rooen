@@ -1,0 +1,9 @@
+.errordispaly {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+}
+.errordispaly h1 {
+  font-size: 50px;
+}

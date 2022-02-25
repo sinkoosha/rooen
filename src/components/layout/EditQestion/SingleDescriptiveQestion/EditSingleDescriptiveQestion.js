@@ -6,9 +6,12 @@ function EditSingleDescriptiveQestion({
 }) {
   const handleInputChange = (e) => {
     const { value } = e.target;
-    const list = [...singleDescriptiveQestion];
-    list[0].qestion = value;
-    setSingleDescriptiveQestion(list);
+    let toJson = [
+      {
+        qestion: value,
+      },
+    ];
+    setSingleDescriptiveQestion(toJson);
   };
 
   return (
@@ -20,11 +23,7 @@ function EditSingleDescriptiveQestion({
           rows="3"
           placeholder="تشریحی متن کامل"
           onChange={handleInputChange}
-          value={singleDescriptiveQestion[0].qestion}
         ></textarea>
-        <pre>
-          {/* {JSON.stringify(singleDescriptiveQestion, null, 2)} */}
-        </pre>
       </div>
     </div>
   );

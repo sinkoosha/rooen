@@ -16,6 +16,13 @@ import EditSingleDescriptiveQestion from "../../../../layout/EditQestion/ٍEditS
 function EditeProgramQuestion() {
   const nav = useNavigate();
   const questionitem = useLocation().state;
+
+  try {
+    JSON.parse(questionitem.options_question);
+  } catch (err) {
+    window.location.replace("/servererror");
+  }
+
   console.log("qestion", questionitem);
   const [questionTitle, setQuestionTitle] = useState(
     questionitem.title_question
@@ -37,8 +44,9 @@ function EditeProgramQuestion() {
   );
   const [singleDescriptiveQestion, setSingleDescriptiveQestion] =
     useState(
-      questionitem.type_of_question == 7 &&
-        questionitem.options_question
+      questionitem.type_of_question == 7
+        ? questionitem.options_question
+        : JSON.parse(questionitem.options_question)
     );
 
   const [descriptiveQestion, setDescriptiveQestion] = useState(
@@ -76,11 +84,14 @@ function EditeProgramQuestion() {
     if (questionType == 1) {
       return JSON.stringify(descriptiveQestion);
     }
+    if (questionType == 3) {
+      return JSON.stringify(descriptiveQestion);
+    }
     if (questionType == 4) {
       return JSON.stringify(bolQes);
       console.log("bolqes", bolQes);
     }
-    if (questionType == 6) {
+    if (questionType == 5) {
       return JSON.stringify(singleDescriptiveQestion);
     }
   };
@@ -172,7 +183,7 @@ function EditeProgramQuestion() {
                 </option>
                 <option
                   value="6"
-                  selected={questionType == 6 ? "selected" : ""}
+                  selected={questionType == 5 ? "selected" : ""}
                 >
                   تشریحی کامل
                 </option>
@@ -206,7 +217,7 @@ function EditeProgramQuestion() {
               />
             )}
 
-            {questionType == 6 && (
+            {questionType == 5 && (
               <EditSingleDescriptiveQestion
                 singleDescriptiveQestion={
                   singleDescriptiveQestion
