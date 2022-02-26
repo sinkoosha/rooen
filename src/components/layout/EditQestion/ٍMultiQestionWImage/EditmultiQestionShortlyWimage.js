@@ -4,6 +4,7 @@ function EditMultiQestionShortlyWimage({
   imageQestion,
   setImageQestion,
 }) {
+  console.log(imageQestion.image);
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -68,8 +69,9 @@ function EditMultiQestionShortlyWimage({
           </div>
         );
       })}
+      <pre>{JSON.stringify(imageQestion.qestion)}</pre>
     </div>
   );
 }
 
-export default MultiQestionShortlyWimage;
+export default EditMultiQestionShortlyWimage;

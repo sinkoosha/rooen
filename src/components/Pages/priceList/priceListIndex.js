@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import { InsertEmoticonRounded } from "@mui/icons-material";
 import { fetchProgram } from "../../../utils/apiConfig";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 function PriceListIndex() {
   const accessToken = localStorage.getItem("accessToken");
   const [fetchPriceList, setFetchPriceList] = useState(null);
@@ -96,7 +97,10 @@ function PriceListIndex() {
           <h5>مشاهده لیست قیمت</h5>
         </div>
         <div class="card-body">
-          <table class="table table-bordered table-wetAsfalt">
+          <table
+            class="table table-bordered table-wetAsfalt download-table-xls-button"
+            id="table-to-xls"
+          >
             <thead>
               <tr>
                 <th scope="col">ردیف</th>
@@ -144,6 +148,13 @@ function PriceListIndex() {
               )}
             </tbody>
           </table>
+          <ReactHTMLTableToExcel
+            className="btn btn-danger"
+            table="table-to-xls"
+            filename="tablexls"
+            sheet="tablexls"
+            buttonText="خروجی اکسل"
+          />
         </div>
       </div>
     </div>

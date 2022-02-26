@@ -12,6 +12,7 @@ import EditTrueFalse from "../../../../layout/EditQestion/EditTrueFalse/EditTrue
 import EditImageQestion from "../../../../layout/EditQestion/ImageQestion/EditImageQestion";
 import EditMultiQestion from "../../../../layout/EditQestion/multiQestion/EditMultiQestion";
 import EditSingleDescriptiveQestion from "../../../../layout/EditQestion/ٍEditSingleDescriptiveQestion/EditSingleDescriptiveQestion";
+import EditMultiQestionShortlyWimage from "../../../../layout/EditQestion/ٍMultiQestionWImage/EditmultiQestionShortlyWimage";
 
 function EditeProgramQuestion() {
   const nav = useNavigate();
@@ -23,7 +24,7 @@ function EditeProgramQuestion() {
     window.location.replace("/servererror");
   }
 
-  console.log("qestion", questionitem);
+  console.log("qestion", questionitem.image);
   const [questionTitle, setQuestionTitle] = useState(
     questionitem.title_question
   );
@@ -59,6 +60,11 @@ function EditeProgramQuestion() {
       ? questionitem.options_question
       : JSON.parse(questionitem.options_question)
   );
+  const [imageQestion, setImageQestion] = useState([
+    questionitem.type_of_question == 7
+      ? questionitem.options_question
+      : JSON.parse(questionitem.options_question),
+  ]);
 
   const handelTitleQuestion = (e) => {
     setQuestionTitle(e.target.value);
@@ -85,7 +91,7 @@ function EditeProgramQuestion() {
       return JSON.stringify(descriptiveQestion);
     }
     if (questionType == 3) {
-      return JSON.stringify(descriptiveQestion);
+      return JSON.stringify(imageQestion);
     }
     if (questionType == 4) {
       return JSON.stringify(bolQes);
@@ -176,6 +182,12 @@ function EditeProgramQuestion() {
                   چند گزینه ایی متن بلند
                 </option>
                 <option
+                  value="3"
+                  selected={questionType == 3 ? "selected" : ""}
+                >
+                  چند گزینه ایی متن و عکس
+                </option>
+                <option
                   value="4"
                   selected={questionType == 4 ? "selected" : ""}
                 >
@@ -208,6 +220,15 @@ function EditeProgramQuestion() {
                 descriptiveQestion={descriptiveQestion}
                 setDescriptiveQestion={setDescriptiveQestion}
               />
+            )}
+
+            {questionType == 3 && (
+              <>
+                <EditMultiQestionShortlyWimage
+                  imageQestion={imageQestion}
+                  setImageQestion={setImageQestion}
+                />
+              </>
             )}
 
             {questionType == 4 && (
