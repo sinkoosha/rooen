@@ -8,6 +8,9 @@
   width: 100%;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
 }
+.chat-app {
+  min-height: 900px;
+}
 .chat-app .people-list {
   width: 280px;
   position: absolute;
@@ -72,7 +75,10 @@
   padding: 15px 20px;
   border-bottom: 2px solid #f4f7f6;
 }
-
+.badge {
+  color: rgb(255, 255, 255) !important;
+  background-color: red;
+}
 .chat .chat-header img {
   float: left;
   border-radius: 40px;
@@ -87,6 +93,8 @@
 .chat .chat-history {
   padding: 20px;
   border-bottom: 2px solid #fff;
+  height: 400px;
+  overflow-y: scroll;
 }
 
 .chat .chat-history ul {
@@ -170,6 +178,11 @@
 
 .chat .chat-message {
   padding: 20px;
+}
+
+.ChatuserBtn {
+  background: none;
+  border: 0px;
 }
 
 .online,

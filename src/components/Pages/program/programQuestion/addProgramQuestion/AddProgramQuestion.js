@@ -165,10 +165,10 @@ function AddProgramQuestion() {
                 onChange={handelTypeQuestion}
               >
                 <option selected>نوع پرسش ...</option>
-                <option value="0">
+                <option value="1">
                   چند گزینه ایی متن کوتاه
                 </option>
-                <option value="1">چند گزینه ایی متن بلند</option>
+                <option value="2">چند گزینه ایی متن بلند</option>
                 <option value="3">
                   چند گزیته ایی متن و عکس
                 </option>
@@ -177,13 +177,13 @@ function AddProgramQuestion() {
                 <option value="7">آپلود عکس</option>
               </select>
             </div>
-            {questionType == 0 && (
+            {questionType == 1 && (
               <MultiQestionShortly
                 inputShortQes={inputShortQes}
                 setInputShortQes={setInputShortQes}
               />
             )}
-            {questionType == 1 && (
+            {questionType == 2 && (
               <DescriptiveQestion
                 descriptiveQestion={descriptiveQestion}
                 setDescriptiveQestion={setDescriptiveQestion}

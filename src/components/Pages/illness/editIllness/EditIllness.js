@@ -19,30 +19,23 @@ function EditIllness() {
     e.persist();
     setIllnessTitle(e.target.value);
   };
-
   const HandelSubmit = (e) => {
+    const formData = new FormData();
+    formData.append("name", illnessTitle);
+    formData.append("illness_id", illnessItem.id);
+    console.log("ilness", illnessTitle, illnessItem.id);
     e.preventDefault();
-    fetch(
-      "http://95.217.96.131:8080/api/admin/edit-titleprogram/",
-      {
-        // Adding method type
-        method: "POST",
-        // Adding body or contents to send
+    fetch("http://95.217.96.131:8080/api/admin/edit-illness", {
+      // Adding method type
+      method: "POST",
+      // Adding body or contents to send
+      headers: {
+        Authorization: accessToken,
+      },
+      // Adding headers to the request
 
-        // Adding headers to the request
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json, text-plain, */*",
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: accessToken,
-        },
-
-        body: JSON.stringify({
-          name: illnessTitle,
-          illness_id: illnessItem.id,
-        }),
-      }
-    )
+      body: formData,
+    })
       // Converting to JSON
       .then((response) => response.json())
       // // Displaying results to console

@@ -171,13 +171,13 @@ function EditeProgramQuestion() {
               >
                 <option
                   value="0"
-                  selected={questionType == 0 ? "selected" : ""}
+                  selected={questionType == 1 ? "selected" : ""}
                 >
                   چند گزینه ایی متن کوتاه
                 </option>
                 <option
                   value="1"
-                  selected={questionType == 1 ? "selected" : ""}
+                  selected={questionType == 2 ? "selected" : ""}
                 >
                   چند گزینه ایی متن بلند
                 </option>
@@ -208,14 +208,14 @@ function EditeProgramQuestion() {
               </select>
             </div>
 
-            {questionType == 0 && (
+            {questionType == 1 && (
               <EditMultiQestion
                 inputShortQes={inputShortQes}
                 setInputShortQes={setInputShortQes}
               />
             )}
 
-            {questionType == 1 && (
+            {questionType == 2 && (
               <EditDescriptiveQestion
                 descriptiveQestion={descriptiveQestion}
                 setDescriptiveQestion={setDescriptiveQestion}
