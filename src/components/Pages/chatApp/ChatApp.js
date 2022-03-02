@@ -13,6 +13,7 @@ function ChatApp() {
   const [sendMassage, setSendMassage] = useState();
   const [userinfo, setUserInfo] = useState(null);
   const [refresh, setRefresh] = useState(0);
+  const [showMsg, setShowMsg] = useState(false);
 
   const HandelsendMessage = () => {
     // POST request using fetch()
@@ -40,7 +41,7 @@ function ChatApp() {
       .then((response) => response.json())
       // // Displaying results to console
       .then((json) => {
-        setRefresh(refresh + 1);
+        getMessage(userinfo.conversation_id);
       });
   };
 
@@ -68,6 +69,7 @@ function ChatApp() {
   };
 
   const getMessage = (id) => {
+    setShowMsg(true);
     setFetGetMessage(null);
     fetch(
       `http://95.217.96.131:8080/api/conversation/getmessage/${id}`,
@@ -93,7 +95,7 @@ function ChatApp() {
   };
 
   useEffect(() => {
-    getMessage(conversationId);
+    conversationId && getMessage(conversationId);
   }, [conversationId, refresh]);
 
   useEffect(() => {
@@ -111,6 +113,7 @@ function ChatApp() {
               HandelUserClick={HandelUserClick}
             />
             <Chat
+              showMsg={showMsg}
               fetGetMessage={fetGetMessage}
               setFetGetMessage={setFetGetMessage}
               userinfo={userinfo}

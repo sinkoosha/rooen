@@ -9,6 +9,7 @@ function Chat({
   sendMassage,
   setSendMassage,
   HandelsendMessage,
+  showMsg,
 }) {
   return (
     <div class="chat">
@@ -25,7 +26,9 @@ function Chat({
       </div>
       <div class="chat-history">
         <ul class="m-b-0">
-          {fetGetMessage ? (
+          {!showMsg ? (
+            ""
+          ) : fetGetMessage ? (
             fetGetMessage.map((item) => (
               <li class="clearfix">
                 <div class="message-data text-right">

@@ -13,6 +13,7 @@ import EditImageQestion from "../../../../layout/EditQestion/ImageQestion/EditIm
 import EditMultiQestion from "../../../../layout/EditQestion/multiQestion/EditMultiQestion";
 import EditSingleDescriptiveQestion from "../../../../layout/EditQestion/ٍEditSingleDescriptiveQestion/EditSingleDescriptiveQestion";
 import EditMultiQestionShortlyWimage from "../../../../layout/EditQestion/ٍMultiQestionWImage/EditmultiQestionShortlyWimage";
+import "./editQes.css";
 
 function EditeProgramQuestion() {
   const nav = useNavigate();
@@ -37,7 +38,9 @@ function EditeProgramQuestion() {
   const [questionPolicy, setQuestionPolicy] = useState(
     questionitem.is_public
   );
-  const [isNecessary, setIsNecessary] = useState(1);
+  const [isNecessary, setIsNecessary] = useState(
+    questionitem.is_necessary
+  );
   const [inputShortQes, setInputShortQes] = useState(
     questionitem.type_of_question == 7
       ? questionitem.options_question
@@ -61,11 +64,17 @@ function EditeProgramQuestion() {
       : JSON.parse(questionitem.options_question)
   );
   const [imageQestion, setImageQestion] = useState([
-    questionitem.type_of_question == 7
+    questionitem.type_of_question == 3
       ? questionitem.options_question
       : JSON.parse(questionitem.options_question),
   ]);
 
+  const [MultiQestion, setMultiQestion] = useState(
+    questionitem.type_of_question == 3
+      ? JSON.parse(questionitem.image)
+      : null
+  );
+  console.log("MultiQestion", MultiQestion);
   const handelTitleQuestion = (e) => {
     setQuestionTitle(e.target.value);
     console.log(questionTitle);
@@ -84,10 +93,10 @@ function EditeProgramQuestion() {
     setIsduration(e.target.value);
   };
   const handelFinalQestion = () => {
-    if (questionType == 0) {
+    if (questionType == 1) {
       return JSON.stringify(inputShortQes);
     }
-    if (questionType == 1) {
+    if (questionType == 2) {
       return JSON.stringify(descriptiveQestion);
     }
     if (questionType == 3) {
@@ -95,9 +104,11 @@ function EditeProgramQuestion() {
     }
     if (questionType == 4) {
       return JSON.stringify(bolQes);
-      console.log("bolqes", bolQes);
     }
     if (questionType == 5) {
+      return JSON.stringify(singleDescriptiveQestion);
+    }
+    if (questionType == 6) {
       return JSON.stringify(singleDescriptiveQestion);
     }
   };
@@ -170,13 +181,13 @@ function EditeProgramQuestion() {
                 disabled="disabled"
               >
                 <option
-                  value="0"
+                  value="1"
                   selected={questionType == 1 ? "selected" : ""}
                 >
                   چند گزینه ایی متن کوتاه
                 </option>
                 <option
-                  value="1"
+                  value="2"
                   selected={questionType == 2 ? "selected" : ""}
                 >
                   چند گزینه ایی متن بلند
@@ -194,10 +205,16 @@ function EditeProgramQuestion() {
                   صحیح / غلط
                 </option>
                 <option
-                  value="6"
+                  value="5"
                   selected={questionType == 5 ? "selected" : ""}
                 >
                   تشریحی کامل
+                </option>
+                <option
+                  value="6"
+                  selected={questionType == 6 ? "selected" : ""}
+                >
+                  فقط عکس
                 </option>
                 <option
                   value="7"
@@ -227,6 +244,7 @@ function EditeProgramQuestion() {
                 <EditMultiQestionShortlyWimage
                   imageQestion={imageQestion}
                   setImageQestion={setImageQestion}
+                  MultiQestion={MultiQestion}
                 />
               </>
             )}
@@ -239,6 +257,17 @@ function EditeProgramQuestion() {
             )}
 
             {questionType == 5 && (
+              <EditSingleDescriptiveQestion
+                singleDescriptiveQestion={
+                  singleDescriptiveQestion
+                }
+                setSingleDescriptiveQestion={
+                  setSingleDescriptiveQestion
+                }
+              />
+            )}
+
+            {questionType == 6 && (
               <EditSingleDescriptiveQestion
                 singleDescriptiveQestion={
                   singleDescriptiveQestion

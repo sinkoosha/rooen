@@ -56,7 +56,6 @@ function MultiQestionShortly({
           </div>
         );
       })}
-      {/* <pre>{JSON.stringify(inputShortQes, null, 2)}</pre> */}
     </div>
   );
 }

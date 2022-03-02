@@ -3,8 +3,10 @@ import React, { useState } from "react";
 function MultiQestionShortlyWimage({
   imageQestion,
   setImageQestion,
+  MultiQestion,
 }) {
   // handle input change
+  console.log(MultiQestion);
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...imageQestion];

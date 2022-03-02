@@ -25,6 +25,9 @@ function SingleDescriptiveQestion({
           onChange={handleInputChange}
         ></textarea>
       </div>
+      <pre>
+        {JSON.stringify(singleDescriptiveQestion, null, 2)}
+      </pre>
     </div>
   );
 }

@@ -56,10 +56,10 @@ function AddProgramQuestion() {
   const accessToken = localStorage.getItem("accessToken");
   const formData = new FormData();
   const handelFinalQestion = () => {
-    if (questionType == 0) {
+    if (questionType == 1) {
       return JSON.stringify(inputShortQes);
     }
-    if (questionType == 1) {
+    if (questionType == 2) {
       return JSON.stringify(descriptiveQestion);
     }
     if (questionType == 3) {
@@ -76,6 +76,13 @@ function AddProgramQuestion() {
       return JSON.stringify(bolQes);
     }
     if (questionType == 5) {
+      return JSON.stringify(singleDescriptiveQestion);
+    }
+    if (questionType == 6) {
+      console.log(
+        "singleDescriptiveQestion",
+        singleDescriptiveQestion
+      );
       return JSON.stringify(singleDescriptiveQestion);
     }
   };
@@ -119,7 +126,7 @@ function AddProgramQuestion() {
         if (json[0].msg == "success") {
           console.log();
           // window.location.href = `/program/indexQuestion/${programItem.id}`;
-          navigate(-1);
+          // navigate(-1);
         }
       });
   };
@@ -174,6 +181,7 @@ function AddProgramQuestion() {
                 </option>
                 <option value="4">بله / خیر</option>
                 <option value="5">تشریحی متن کامل</option>
+                <option value="6">فقط عدد</option>
                 <option value="7">آپلود عکس</option>
               </select>
             </div>
@@ -200,7 +208,18 @@ function AddProgramQuestion() {
             {questionType == 4 && (
               <TrueFalse bolQes={bolQes} setBolQes={setBolQes} />
             )}
+
             {questionType == 5 && (
+              <SingleDescriptiveQestion
+                singleDescriptiveQestion={
+                  singleDescriptiveQestion
+                }
+                setSingleDescriptiveQestion={
+                  setSingleDescriptiveQestion
+                }
+              />
+            )}
+            {questionType == 6 && (
               <SingleDescriptiveQestion
                 singleDescriptiveQestion={
                   singleDescriptiveQestion
