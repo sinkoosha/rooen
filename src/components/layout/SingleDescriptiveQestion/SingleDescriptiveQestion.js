@@ -26,7 +26,7 @@ function SingleDescriptiveQestion({
         ></textarea>
       </div>
       <pre>
-        {JSON.stringify(singleDescriptiveQestion, null, 2)}
+        {/* {JSON.stringify(singleDescriptiveQestion, null, 2)} */}
       </pre>
     </div>
   );

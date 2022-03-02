@@ -51,7 +51,7 @@ function AddProgramQuestion() {
   };
   const handelquestionPolicy = (e) => {
     setQuestionPolicy(e.target.value);
-    console.log(questionPolicy);
+    console.log("qp", questionPolicy);
   };
   const accessToken = localStorage.getItem("accessToken");
   const formData = new FormData();
@@ -69,7 +69,7 @@ function AddProgramQuestion() {
       });
     }
     if (questionType == 7) {
-      return "imageQestion";
+      return null;
     }
     if (questionType == 4) {
       console.log(JSON.stringify(bolQes));
@@ -126,7 +126,7 @@ function AddProgramQuestion() {
         if (json[0].msg == "success") {
           console.log();
           // window.location.href = `/program/indexQuestion/${programItem.id}`;
-          // navigate(-1);
+          navigate(-1);
         }
       });
   };

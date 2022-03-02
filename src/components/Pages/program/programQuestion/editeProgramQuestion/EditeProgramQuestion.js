@@ -36,7 +36,7 @@ function EditeProgramQuestion() {
     questionitem.type_of_question
   );
   const [questionPolicy, setQuestionPolicy] = useState(
-    questionitem.is_public
+    questionitem.is_necessary
   );
   const [isNecessary, setIsNecessary] = useState(
     questionitem.is_necessary
@@ -80,10 +80,12 @@ function EditeProgramQuestion() {
     console.log(questionTitle);
   };
   const handelTypeQuestion = (e) => {
+    e.persist();
     setQuestionType(e.target.value);
     console.log(questionType);
   };
   const handelquestionPolicy = (e) => {
+    e.persist();
     setQuestionPolicy(e.target.value);
     console.log(questionPolicy);
   };
@@ -111,9 +113,14 @@ function EditeProgramQuestion() {
     if (questionType == 6) {
       return JSON.stringify(singleDescriptiveQestion);
     }
+
+    if (questionType == 7) {
+      return null;
+    }
   };
 
   const HandelSubmit = (e) => {
+    e.preventDefault();
     formData.append("title_question", questionTitle);
     formData.append("question_id", questionitem.id);
     formData.append("type_of_question", questionType);
@@ -287,7 +294,7 @@ function EditeProgramQuestion() {
               <select
                 class="form-select"
                 id="inputGroupSelect1"
-                onChange={handelquestionPolicy}
+                onChange={(e) => handelquestionPolicy(e)}
               >
                 <option
                   value="0"
