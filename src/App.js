@@ -19,10 +19,33 @@ function App() {
   const [mobil, setMobil] = useState("");
   const [authLogin, setAuthLogin] = useState();
   const [apiInfo, setApiInfo] = useState({});
-  localStorage.getItem("accessToken")
-    ? console.log("ok")
-    : console.log("nok");
+  const [loginFlage, setLoginflage] = useState(false);
 
+  useEffect(() => {
+    localStorage.getItem("accessToken")
+      ? handelLoginFlage()
+      : setLoginflage(false);
+  }, []);
+
+  const handelLoginFlage = () => {
+    fetch("http://95.217.96.131:8080/api/me", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json, text-plain, */*",
+        "X-Requested-With": "XMLHttpRequest",
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        // console.log("me", "id" in json);
+        setLoginflage("id" in json);
+      });
+  };
+
+  console.log(loginFlage);
   return (
     <auth.Provider value={{}}>
       <div className="App">

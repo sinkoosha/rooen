@@ -68,6 +68,29 @@ function ChatApp() {
       });
   };
 
+  const handeReadMassage = (id) => {
+    fetch(
+      `http://95.217.96.131:8080/api/conversation/conversationsread`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          conversation_id: id,
+        }),
+
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json, text-plain, */*",
+          "X-Requested-With": "XMLHttpRequest",
+          Authorization: accessToken,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((json) => {
+        setRefresh(refresh + 1);
+      });
+  };
+
   const getMessage = (id) => {
     setShowMsg(true);
     setFetGetMessage(null);
@@ -86,6 +109,7 @@ function ChatApp() {
       .then((response) => response.json())
       .then((json) => {
         setFetGetMessage(json.data);
+        handeReadMassage(id);
       });
   };
 
@@ -100,7 +124,7 @@ function ChatApp() {
 
   useEffect(() => {
     converstionIndex();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="indexHome">
@@ -111,6 +135,7 @@ function ChatApp() {
               fetchConverstion={fetchConverstion}
               setfetchConverstion={setfetchConverstion}
               HandelUserClick={HandelUserClick}
+              refresh={refresh}
             />
             <Chat
               showMsg={showMsg}

@@ -63,11 +63,9 @@ function EditeProgramQuestion() {
       ? questionitem.options_question
       : JSON.parse(questionitem.options_question)
   );
-  const [imageQestion, setImageQestion] = useState([
-    questionitem.type_of_question == 3
-      ? questionitem.options_question
-      : JSON.parse(questionitem.options_question),
-  ]);
+  const [imageQestion, setImageQestion] = useState(
+    JSON.parse(questionitem.options_question)
+  );
 
   const [MultiQestion, setMultiQestion] = useState(
     questionitem.type_of_question == 3

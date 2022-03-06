@@ -5,8 +5,6 @@ function MultiQestionShortlyWimage({
   setImageQestion,
   MultiQestion,
 }) {
-  // handle input change
-  console.log(MultiQestion);
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...imageQestion];
@@ -29,7 +27,10 @@ function MultiQestionShortlyWimage({
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setImageQestion([...imageQestion, { qestion: "" }]);
+    setImageQestion([
+      ...imageQestion,
+      { qestion: "", imgqes: "" },
+    ]);
   };
 
   return (
@@ -69,6 +70,7 @@ function MultiQestionShortlyWimage({
           </div>
         );
       })}
+      <pre>{JSON.stringify(imageQestion)}</pre>
     </div>
   );
 }

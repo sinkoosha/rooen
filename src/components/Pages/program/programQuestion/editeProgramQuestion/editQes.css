@@ -4,3 +4,6 @@
   align-items: center;
   flex-direction: column-reverse;
 }
+.img-thumbnail {
+  max-width: 300px;
+}
