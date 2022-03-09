@@ -39,6 +39,7 @@ function IndexExpertRequest({ refreshItem, setRefreshItem }) {
       });
   };
   const expertsRequestIndex = () => {
+    setfetchExpresRequest(null)
     // POST request using fetch()
     fetch(
       allR
@@ -159,9 +160,9 @@ function IndexExpertRequest({ refreshItem, setRefreshItem }) {
             <tbody>
               {fetchExpres != null &&
               fetchExpresRequest != null ? (
-                fetchExpresRequest.map((item) => (
+                fetchExpresRequest.map((item , index) => (
                   <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{index+1}</th>
                     <td>
                       {findIndexExpert(item.expert_id)[0].name}
                     </td>
@@ -172,7 +173,7 @@ function IndexExpertRequest({ refreshItem, setRefreshItem }) {
                       <Link
                         to={`/expertReqest/${item.id}`}
                         state={
-                          findIndexExpert(item.expert_id)[0]
+                         [ findIndexExpert(item.expert_id)[0] , item]
                         }
                       >
                         اطلاعات بیشتر

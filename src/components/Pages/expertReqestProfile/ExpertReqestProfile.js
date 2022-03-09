@@ -11,18 +11,19 @@ import auth from "../../../contax/authContax";
 function ExpertReqestProfile({ refreshItem, setRefreshItem }) {
   const accessToken = localStorage.getItem("accessToken");
   const experts = useLocation().state;
+  console.log("test" ,experts[1].id)
   const [loading, setLoading] = useState(false);
   const [fetchExpres, setfetchExpres] = useState(null);
   const [fetchExpresRequest, setfetchExpresRequest] =
     useState(null);
-  console.log(experts);
+
 
   const statusHandeler = (id) => {
     if (id === 0) {
-      return "آفلاین";
+      return "بررسی نشده";
     }
     if (id === 1) {
-      return "آنلاین";
+      return "قبول شده";
     }
   };
 
@@ -54,7 +55,10 @@ function ExpertReqestProfile({ refreshItem, setRefreshItem }) {
   };
 
   const expertStatusSwitch = (requsetId, status) => {
+    console.log("requsetId" ,requsetId)
+    console.log("status" ,status)
     setLoading(true);
+    console.log("requsetId" , requsetId);
     fetch(
       "http://95.217.96.131:8080/api/admin/change-expert-request",
       {
@@ -89,10 +93,15 @@ function ExpertReqestProfile({ refreshItem, setRefreshItem }) {
   const fetchProfile = () => {
     if (fetchExpresRequest) {
       return fetchExpresRequest.filter(
-        (item) => item.expert_id == experts.id
+        (item) => item.id == experts[1].id
       );
     }
   };
+  useEffect(()=>{
+    fetchExpresRequest !== null &&   console.log("fetchProfile()" ,fetchProfile())
+
+
+  },[])
 
   return fetchExpresRequest !== null ? (
     <div className="indexHome">

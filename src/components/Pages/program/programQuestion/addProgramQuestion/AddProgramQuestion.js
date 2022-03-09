@@ -64,6 +64,7 @@ function AddProgramQuestion() {
       return JSON.stringify(descriptiveQestion);
     }
     if (questionType == 3) {
+      
       return JSON.stringify(imageQestion);
       imageQestion.map((item, index) => {
         formData.append(`photo${index + 1}`, item.imgqes);

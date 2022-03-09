@@ -91,19 +91,7 @@ function Login({
   };
 
   const codeSubmit = (e) => {
-    // setAuthLogin(
-    //   "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC85NS4yMTcuOTYuMTMxOjgwODBcL2FwaVwvZ2V0YXV0aGNvZGUiLCJpYXQiOjE2NDI2MjUwNTQsImV4cCI6MTY1ODE3NzA1NCwibmJmIjoxNjQyNjI1MDU0LCJqdGkiOiJ5MDlGc0FIcFBYOU5BY2dLIiwic3ViIjoxNiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.30RY0e74WgEYnnkNh7GNrWUWmIWxH4BnJwKNvfQSR9g"
-    // );
-    // setApiInfo({
-    //   ...apiInfo,
-    //   accessToken:
-    //     "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC85NS4yMTcuOTYuMTMxOjgwODBcL2FwaVwvZ2V0YXV0aGNvZGUiLCJpYXQiOjE2NDI2MjUwNTQsImV4cCI6MTY1ODE3NzA1NCwibmJmIjoxNjQyNjI1MDU0LCJqdGkiOiJ5MDlGc0FIcFBYOU5BY2dLIiwic3ViIjoxNiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.30RY0e74WgEYnnkNh7GNrWUWmIWxH4BnJwKNvfQSR9g",
-    // });
 
-    // localStorage.setItem(
-    //   "accessToken",
-    //   "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC85NS4yMTcuOTYuMTMxOjgwODBcL2FwaVwvZ2V0YXV0aGNvZGUiLCJpYXQiOjE2NDI2MjUwNTQsImV4cCI6MTY1ODE3NzA1NCwibmJmIjoxNjQyNjI1MDU0LCJqdGkiOiJ5MDlGc0FIcFBYOU5BY2dLIiwic3ViIjoxNiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.30RY0e74WgEYnnkNh7GNrWUWmIWxH4BnJwKNvfQSR9g"
-    // );
 
     e.preventDefault();
     fetch("http://95.217.96.131:8080/api/getauthcode", {
