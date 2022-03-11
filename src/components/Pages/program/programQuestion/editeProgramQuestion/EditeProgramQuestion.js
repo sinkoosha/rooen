@@ -103,7 +103,7 @@ function EditeProgramQuestion() {
       return JSON.stringify(imageQestion);
     }
     if (questionType == 4) {
-      return JSON.stringify(bolQes);
+      return null;
     }
     if (questionType == 5) {
       return JSON.stringify(singleDescriptiveQestion);
@@ -153,12 +153,16 @@ function EditeProgramQuestion() {
         }
       });
   };
+  const back =()=>{
+    nav(-1)
+  }
 
   return (
     <div className="indexHome ">
       <div class="">
         <div class="card-header">
-          {questionitem.question} - ,ویرایش کردن پرسش های برنامه
+          <div>{questionitem.question} ,ویرایش کردن پرسش های برنامه</div>
+          <button className="btn btn-danger" onClick={back}>بازگشت</button>
         </div>
         <div class="card-body">
           <form className="col-md-6" onSubmit={HandelSubmit}>

@@ -14,13 +14,7 @@ function TrueFalse({ bolQes, setBolQes }) {
   return (
     <div>
       <div class="input-group short-item">
-        <textarea
-          name="qestion"
-          class="form-control"
-          rows="3"
-          placeholder="سوال"
-          onChange={handleInputChange}
-        ></textarea>
+  <h3>بلی / خیر</h3>
       </div>
     </div>
   );

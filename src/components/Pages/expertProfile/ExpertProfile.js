@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import {useParams, useLocation, useNavigate} from "react-router-dom";
 import "./ExpertProfile.css";
 import ManOutlinedIcon from "@mui/icons-material/ManOutlined";
 import WomanOutlinedIcon from "@mui/icons-material/WomanOutlined";
@@ -52,6 +52,7 @@ function ExpertProfile() {
     }
   };
 
+
   const expertStatusSwitch = (profileId, status) => {
     console.log("is run?1?1");
     fetch("http://95.217.96.131:8080/api/admin/confirm-expert", {
@@ -79,8 +80,14 @@ function ExpertProfile() {
       });
   };
 
+  const navigate = useNavigate()
+  const back =()=>{
+    navigate(-1)
+  }
+
   return (
     <div className="indexHome">
+      <button className="btn btn-danger" onClick={back}>بازگشت</button>
       {dataLoaded ? (
         <div className="container rounded bg-white mt-5 mb-5 card">
           <div className="row">

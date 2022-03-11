@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import auth from "../../../../contax/authContax";
 import axios from "axios";
-import { Route } from "react-router-dom";
+import { Route , useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./addprogram.css";
@@ -59,12 +59,21 @@ function AddProgram() {
           window.location.href = "/program";
         }
       });
-  };
+  }
+  const navigate = useNavigate()
+  const back =()=>{
+    navigate(-1)
+  }
 
   return (
     <div className="indexHome ">
       <div class="">
-        <div class="card-header">اضافه کردن برنامه</div>
+        <div class="card-header">
+          <div>   اضافه کردن برنامه</div>
+          <button className="btn btn-danger" onClick={back}>بازگشت</button>
+
+
+       </div>
         <div class="card-body">
           <form className="col-md-6" onSubmit={HandelSubmit}>
             <div class="mb-3">

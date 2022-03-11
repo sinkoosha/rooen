@@ -69,11 +69,18 @@ function EditProgram() {
         }
       });
   };
+  const navigate = useNavigate()
+  const back =()=>{
+    navigate(-1)
+  }
 
   return (
     <div className="indexHome ">
       <div class="">
-        <div class="card-header">ویرایش برنامه</div>
+        <div class="card-header">
+          <div> ویرایش برنامه</div>
+          <button className="btn btn-danger" onClick={back}>بازگشت</button>
+         </div>
         <div class="card-body">
           <form className="col-md-6" onSubmit={HandelSubmit}>
             <div class="mb-3">

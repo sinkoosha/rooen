@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation  , useNavigate} from "react-router-dom";
 import "./ExpertProfile.css";
 import ManOutlinedIcon from "@mui/icons-material/ManOutlined";
 import WomanOutlinedIcon from "@mui/icons-material/WomanOutlined";
@@ -102,6 +102,10 @@ function ExpertReqestProfile({ refreshItem, setRefreshItem }) {
 
 
   },[])
+  const navigate = useNavigate()
+  const back =()=>{
+    navigate(-1)
+  }
 
   return fetchExpresRequest !== null ? (
     <div className="indexHome">
@@ -111,7 +115,8 @@ function ExpertReqestProfile({ refreshItem, setRefreshItem }) {
             <div class="col-xl-12 col-md-12">
               <div class="card user-card-full">
                 <div className="card-header">
-                  مشاهده در خواست
+                  <div>مشاهده در خواست</div>
+                  <button className="btn btn-danger" onClick={back}>بازگشت</button>
                 </div>
                 <div class="card-body row m-l-0 m-r-0">
                   <div class="col-sm-4 bg-c-lite-green user-profile">

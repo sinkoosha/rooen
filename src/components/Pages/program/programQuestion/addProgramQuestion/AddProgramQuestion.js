@@ -142,12 +142,17 @@ function AddProgramQuestion() {
     });
     return result;
   };
+  const back =()=>{
+    navigate(-1)
+  }
+
 
   return (
     <div className="indexHome ">
       <div class="">
         <div class="card-header">
-          {programItem.name} - اضافه کردن پرسش های برنامه
+          <div> {programItem.name} اضافه کردن پرسش های برنامه</div>
+          <button className="btn btn-danger" onClick={back}>بازگشت</button>
         </div>
         <div class="card-body">
           <pre>{handelOutPutJsonFormat(descriptiveQestion)}</pre>
